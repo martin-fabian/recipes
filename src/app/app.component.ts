@@ -8,10 +8,10 @@ import * as moment from 'moment';
 export class AppComponent implements OnInit {
 
   ngOnInit(): void {
-    this.momentSetUp()
+    this.momentSetUp();
   }
 
-  momentSetUp(){
+  momentSetUp() {
     moment.locale('cs_CZ');
   }
 }
