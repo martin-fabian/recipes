@@ -1,0 +1,9 @@
+<h5 class="card-header">Přehled posledních přidaných receptů</h5>
+<div class="receipt-list-empty" *ngIf="receipts && receipts.length == 0">Nebyl nalezen žádný recept</div>
+<ul *ngFor="let receipt of receipts" class="receipt-list">
+  <li>{{receipt.name}}</li>
+  <li>Kategorie: {{receipt.category}}</li>
+  <li><img [src]=receipt.img alt="foto"></li>
+  <li>{{receipt.content}}</li>
+</ul>
+

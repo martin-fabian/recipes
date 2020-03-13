@@ -1,0 +1,12 @@
+.floating-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  border-radius: 50%;
+  width: 5em;
+}
+
+button:hover{
+  background-color: orange;
+  border-color: orange;
+}

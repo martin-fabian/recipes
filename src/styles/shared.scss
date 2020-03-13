@@ -1,0 +1,15 @@
+@import 'src/styles/_colors.scss';
+
+.footer {
+  position: absolute;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: $color-footer-bg;
+  display: flex;
+  align-items: center;
+  color: $color-footer-font;
+  margin-top: 10px;
+  font-size: 1em;
+  padding-top: 10px;
+}

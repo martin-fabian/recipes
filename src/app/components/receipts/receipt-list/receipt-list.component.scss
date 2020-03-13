@@ -1,0 +1,41 @@
+.receipt-list {
+  display: inline-table;
+  width: 300px;
+  margin: 30px 30px 0 10px;
+  padding: 20px;
+  border: 1px solid #106cc8;
+}
+
+.receipt-list-empty {
+  height: 200px;
+  width: 100%;
+  padding: 1.5em 0 1em 0;
+  font-size: 3em;
+  color: #ccc;
+  border: 3px dashed;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  width: 450px;
+  height: 450px;
+}
+
+img {
+  border-radius: 30%;
+}
+
+
+.table-receipt-list{
+  display: inline-block;
+  transition: all 1s linear;
+}
+
