@@ -1,41 +1,49 @@
 <div class="container add-receipt-form-size">
-  <form [formGroup]="addNewReceiptForm">
-    <div class="form-group">
-      <label for="exampleFormControlInput1">Název receptu</label>
-      <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name" required="true">
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Kategorie</label>
-      <select class="form-control" id="exampleFormControlSelect1" formControlName="category">
-        <option></option>
-        <option>S masem</option>
-        <option>Bez masa</option>
-        <option>Dezerty</option>
-        <option>Svačiny</option>
-        <option>Polévky</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlFile1">Vložit obrázek</label>
-      <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="imgUrl"
-             (change)="onSelectFile($event)">
-    </div>
-    <div class="form-group">
-      <label for="exampleFormControlTextarea1">Popis receptu</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" formControlName="content"
-                required="true"></textarea>
-    </div>
-    <!--    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid" (click)="openModal(template)">Uložit recept-->
-    <!--    </button>-->
-    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid"
-            (click)="openSharedModal(ButtonActionEnum.SEND_RECEIPT_FORM, MessagesConstants.SEND_NEW_RECEIPT_CONFIRM)">
-      Uložit recept
-    </button>
-    <button class="btn btn-danger float-right"
-            (click)="openSharedModal(ButtonActionEnum.RESET_RECEIPT_FORM, MessagesConstants.RESET_RECEIPT_FORM)">Vymazat
-      formulář
-    </button>
-  </form>
+    <form [formGroup]="addNewReceiptForm">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Název receptu</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
+            <alert type="warning" *ngIf="addNewReceiptForm.get('name').touched&&addNewReceiptForm.get('name').invalid">
+                <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+            </alert>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Kategorie</label>
+            <select class="form-control" id="exampleFormControlSelect1" formControlName="category">
+                <option></option>
+                <option>S masem</option>
+                <option>Bez masa</option>
+                <option>Dezerty</option>
+                <option>Svačiny</option>
+                <option>Polévky</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlFile1">Vložit obrázek</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="imgUrl"
+                   (change)="onSelectFile($event)">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Popis receptu</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" formControlName="content"
+            ></textarea>
+          <alert type="warning"
+                 *ngIf="addNewReceiptForm.get('content').touched&&addNewReceiptForm.get('content').invalid">
+            <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+          </alert>
+        </div>
+        <!--    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid" (click)="openModal(template)">Uložit recept-->
+        <!--    </button>-->
+        <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid"
+                (click)="openSharedModal(ButtonActionEnum.SEND_RECEIPT_FORM, MessagesConstants.SEND_NEW_RECEIPT_CONFIRM)">
+            Uložit recept
+        </button>
+        <button class="btn btn-danger float-right"
+                (click)="openSharedModal(ButtonActionEnum.RESET_RECEIPT_FORM, MessagesConstants.RESET_RECEIPT_FORM)">
+            Vymazat
+            formulář
+        </button>
+    </form>
 </div>
 
 <!-- modal window -->
@@ -47,5 +55,5 @@
 <!--  </div>-->
 <!--</ng-template>-->
 <app-receipt-form-message
-  [show_msg_input]=MessagesConstants.SEND_NEW_RECEIPT_CONFIRM>
+        [show_msg_input]=MessagesConstants.SEND_NEW_RECEIPT_CONFIRM>
 </app-receipt-form-message>

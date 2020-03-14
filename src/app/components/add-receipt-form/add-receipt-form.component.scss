@@ -12,3 +12,7 @@ input.ng-touched.ng-invalid{
 textarea.ng-touched.ng-invalid{
   border-color: $color-invalid-field;
 }
+
+textarea{
+  resize: none;
+}

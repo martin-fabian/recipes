@@ -1,22 +1,23 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-main-menu',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.scss']
+    selector: 'app-main-menu',
+    encapsulation: ViewEncapsulation.None,
+    templateUrl: './main-menu.component.html',
+    styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent implements OnInit, OnDestroy {
 
-  searchForm = new FormGroup({});
+    searchForm = new FormGroup({});
 
-  constructor() {}
+    constructor() {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  ngOnDestroy(): void {
-  }
+    ngOnDestroy(): void {
+    }
 
 }
