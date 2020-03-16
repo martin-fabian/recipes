@@ -20,19 +20,23 @@ export class AddReceiptFormComponent implements OnInit {
     private imgUrl: string | ArrayBuffer;
     public MessagesConstants = MessagesConstants;
     public ButtonActionEnum = ButtonActionEnum;
-
-    addNewReceiptForm = new FormGroup({
-        name: new FormControl('', Validators.required),
-        category: new FormControl(''),
-        imgUrl: new FormControl(''),
-        content: new FormControl('', Validators.required)
-    });
+    public maxLengthVarContent = 2000;
+    public maxLengthVarName = 50;
+    public addNewReceiptForm: FormGroup;
 
     constructor(private modalService: BsModalService, private route: Router, private receipService: ReceiptService,
                 private modalMessageService: ModalMessageService) {
     }
 
     ngOnInit(): void {
+        this.addNewReceiptForm = new FormGroup({
+            name: new FormControl('', Validators.compose(
+                [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
+            category: new FormControl(''),
+            imgUrl: new FormControl(''),
+            content: new FormControl('', Validators.compose(
+                [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
+        });
         this.modalMessageService.onConfirmSubscriptionModalWindow.subscribe(() => this.confirm());
         this.modalMessageService.onResetSubscriptionModalWindow.subscribe(() => this.decline());
     }

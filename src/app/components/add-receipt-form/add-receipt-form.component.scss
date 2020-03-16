@@ -1,18 +1,18 @@
 @import 'src/styles/_colors.scss';
 
-.add-receipt-form-size{
+.add-receipt-form-size {
   width: 50%;
   margin-top: 15px;
 }
 
-input.ng-touched.ng-invalid{
+input.ng-touched.ng-invalid {
   border-color: $color-invalid-field;
 }
 
-textarea.ng-touched.ng-invalid{
+textarea.ng-touched.ng-invalid {
   border-color: $color-invalid-field;
 }
 
-textarea{
+textarea {
   resize: none;
 }
