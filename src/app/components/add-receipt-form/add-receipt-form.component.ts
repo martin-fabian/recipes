@@ -20,7 +20,7 @@ export class AddReceiptFormComponent implements OnInit {
     private imgUrl: string | ArrayBuffer;
     public MessagesConstants = MessagesConstants;
     public ButtonActionEnum = ButtonActionEnum;
-    public maxLengthVarContent = 2000;
+    public maxLengthVarContent = 3000;
     public maxLengthVarName = 50;
     public addNewReceiptForm: FormGroup;
 
