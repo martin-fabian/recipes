@@ -14,34 +14,34 @@ import {AboutUsComponent} from './about-us/about-us.component';
 
 
 const components = [
-    MainMenuComponent,
-    HomePageComponent,
-    ReceiptPageComponent,
-    FooterComponent,
-    AddReceiptFormComponent,
-    ReceiptListComponent,
-    ReceiptFormMessageComponent
+  MainMenuComponent,
+  HomePageComponent,
+  ReceiptPageComponent,
+  FooterComponent,
+  AddReceiptFormComponent,
+  ReceiptListComponent,
+  ReceiptFormMessageComponent
 ];
 
 @NgModule({
-    imports: [
-        RouterModule,
-        BrowserModule,
-        ReactiveFormsModule,
-        FormsModule,
-        TabsModule,
-        AlertModule
-    ],
-    declarations: [
-        ...components,
-        AboutUsComponent
-    ],
-    providers: [],
-    exports: [
-        MainMenuComponent,
-        FooterComponent
-    ],
-    entryComponents: []
+  imports: [
+    RouterModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TabsModule,
+    AlertModule
+  ],
+  declarations: [
+    ...components,
+    AboutUsComponent
+  ],
+  providers: [],
+  exports: [
+    MainMenuComponent,
+    FooterComponent
+  ],
+  entryComponents: []
 })
 export class ComponentModule {
 

@@ -10,21 +10,21 @@ import {AlertModule} from 'ngx-bootstrap';
 
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        ComponentModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        ModalModule.forRoot(),
-        AlertModule.forRoot()
-    ],
-    providers: [],
-    schemas: [NO_ERRORS_SCHEMA],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    ComponentModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
+  ],
+  providers: [],
+  schemas: [NO_ERRORS_SCHEMA],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

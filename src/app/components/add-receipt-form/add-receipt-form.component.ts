@@ -17,12 +17,12 @@ import {ButtonActionEnum} from '../../constants/button-action.enum';
 export class AddReceiptFormComponent implements OnInit {
 
     private modalRef: BsModalRef;
-    private imgUrl: string | ArrayBuffer;
     public MessagesConstants = MessagesConstants;
     public ButtonActionEnum = ButtonActionEnum;
     public maxLengthVarContent = 3000;
     public maxLengthVarName = 50;
     public addNewReceiptForm: FormGroup;
+    public filename = 'Vložit obrázek';
 
     constructor(private modalService: BsModalService, private route: Router, private receipService: ReceiptService,
                 private modalMessageService: ModalMessageService) {
@@ -63,13 +63,19 @@ export class AddReceiptFormComponent implements OnInit {
 
 
     onSelectFile(event) { // called each time file input changes
-        if (event.target.files && event.target.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (e: any) => { // called once readAsDataURL is completed
-                this.imgUrl = e.target.result;
+        const file = event.target.files;
+        if (file && file[0]) {
+            const mimeType = file[0].type;
+            if (mimeType.match(/image\/*/) == null) {
+                return;
+            }
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file[0]);
+            fileReader.onload = () => {
+                this.addNewReceiptForm.patchValue([file[0]]);
+                this.filename = file[0].name;
             };
-            const imgUrlTemp = reader.readAsDataURL(event.target.files[0]); // read file as data url
-            this.addNewReceiptForm.patchValue([imgUrlTemp]);
+
         } else {
             prompt(MessagesConstants.UPLOAD_IMG_FAILED);
             console.log('Failed to load img.');

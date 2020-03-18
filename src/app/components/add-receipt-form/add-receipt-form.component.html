@@ -10,7 +10,8 @@
             </alert>
             <alert type="warning"
                    *ngIf="addNewReceiptForm.get('name').hasError('maxlength')">
-                Maximální délka názvu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve vašem textu jich je
+                Maximální délka názvu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve vašem
+                textu jich je
                 {{addNewReceiptForm.get('name').value.length}}
             </alert>
         </div>
@@ -26,9 +27,12 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="exampleFormControlFile1">Vložit obrázek</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="imgUrl"
-                   (change)="onSelectFile($event)">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="exampleFormControlFile1"
+                       formControlName="imgUrl"
+                       (change)="onSelectFile($event)" accept=".jpg,.jpeg,.png">
+                <label for="exampleFormControlFile1" class="custom-file-label">{{this.filename}}</label>
+            </div>
         </div>
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Popis receptu</label>
@@ -42,7 +46,8 @@
             </alert>
             <alert type="warning"
                    *ngIf="addNewReceiptForm.get('content').hasError('maxlength')">
-                Maximální délka popisu může být <strong>{{this.maxLengthVarContent}}</strong> znaků. Ve vašem textu jich
+                Maximální délka popisu může být <strong>{{this.maxLengthVarContent}}</strong> znaků. Ve
+                vašem textu jich
                 je
                 {{addNewReceiptForm.get('content').value.length}}
             </alert>
