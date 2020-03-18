@@ -1,13 +1,15 @@
 <!-- modal window -->
 <ng-template #template>
-    <div class="modal-body text-center">
-        <p>{{show_msg_input}}</p>
-        <button *ngIf="typeOfAction === ButtonActionEnum.SEND_RECEIPT_FORM" type="button" class="btn btn-primary"
-                (click)="confirm()">Ano
-        </button>
-        <button *ngIf="typeOfAction === ButtonActionEnum.RESET_RECEIPT_FORM" type="button" class="btn btn-danger"
-                (click)="confirmReset()">Ano
-        </button>
-        <button type="button" class="btn btn-secondary" (click)="decline()">Ne</button>
-    </div>
+  <div class="modal-body text-center">
+    <p>{{show_msg_input}}</p>
+    <button *ngIf="typeOfAction === ButtonActionEnum.SEND_RECEIPT_FORM" type="button"
+            class="btn btn-primary"
+            (click)="confirm()">Ano
+    </button>
+    <button *ngIf="typeOfAction === ButtonActionEnum.RESET_RECEIPT_FORM" type="button"
+            class="btn btn-danger"
+            (click)="confirmReset()">Ano
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="decline()">Ne</button>
+  </div>
 </ng-template>
