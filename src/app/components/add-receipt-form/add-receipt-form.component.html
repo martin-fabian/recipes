@@ -1,69 +1,74 @@
 <div class="container add-receipt-form-size">
-    <form [formGroup]="addNewReceiptForm">
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Název receptu</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
-            <alert type="warning" *ngIf="addNewReceiptForm.get('name').touched
+  <form [formGroup]="addNewReceiptForm">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Název receptu</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
+      <alert type="warning" *ngIf="addNewReceiptForm.get('name').touched
             &&addNewReceiptForm.get('name').invalid
             &&!addNewReceiptForm.get('name').hasError('maxlength')">
-                <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
-            </alert>
-            <alert type="warning"
-                   *ngIf="addNewReceiptForm.get('name').hasError('maxlength')">
-                Maximální délka názvu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve vašem
-                textu jich je
-                {{addNewReceiptForm.get('name').value.length}}
-            </alert>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Kategorie</label>
-            <select class="form-control" id="exampleFormControlSelect1" formControlName="category">
-                <option></option>
-                <option>S masem</option>
-                <option>Bez masa</option>
-                <option>Dezerty</option>
-                <option>Svačiny</option>
-                <option>Polévky</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="exampleFormControlFile1"
-                       formControlName="imgUrl"
-                       (change)="onSelectFile($event)" accept=".jpg,.jpeg,.png">
-                <label for="exampleFormControlFile1" class="custom-file-label">{{this.filename}}</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Popis receptu</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
-                      formControlName="content"></textarea>
-            <alert type="warning"
-                   *ngIf="addNewReceiptForm.get('content').touched
+        <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+      </alert>
+      <alert type="warning"
+             *ngIf="addNewReceiptForm.get('name').hasError('maxlength')">
+        Maximální délka názvu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve vašem
+        textu jich je
+        {{addNewReceiptForm.get('name').value.length}}
+      </alert>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Kategorie</label>
+      <select class="form-control" id="exampleFormControlSelect1" formControlName="category">
+        <option></option>
+        <option>S masem</option>
+        <option>Bez masa</option>
+        <option>Dezerty</option>
+        <option>Svačiny</option>
+        <option>Polévky</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="exampleFormControlFile1"
+               formControlName="image"
+               (change)="onSelectFile($event)" accept=".jpg,.jpeg,.png">
+        <alert type="danger" *ngIf="alertMaxSize">Maximální velikost obrázku může být 2Mb</alert>
+        <alert type="danger" *ngIf="alertImageType">Vložený soubor není obrázek, vložte prosím ve formátu
+          <strong> .jpg,.jpeg,.png"</strong>
+        </alert>
+        <label for="exampleFormControlFile1" class="custom-file-label">{{this.filename}}</label>
+      </div>
+    </div>
+    <img [src]="imageBase64" height="250px" width="150" [hidden]="!imageBase64" alt="obrázek receptu"/>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Popis receptu</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
+                formControlName="content"></textarea>
+      <alert type="warning"
+             *ngIf="addNewReceiptForm.get('content').touched
                    &&addNewReceiptForm.get('content').invalid
                    &&!addNewReceiptForm.get('content').hasError('maxlength')">
-                <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
-            </alert>
-            <alert type="warning"
-                   *ngIf="addNewReceiptForm.get('content').hasError('maxlength')">
-                Maximální délka popisu může být <strong>{{this.maxLengthVarContent}}</strong> znaků. Ve
-                vašem textu jich
-                je
-                {{addNewReceiptForm.get('content').value.length}}
-            </alert>
-        </div>
-        <!--    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid" (click)="openModal(template)">Uložit recept-->
-        <!--    </button>-->
-        <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid"
-                (click)="openSharedModal(ButtonActionEnum.SEND_RECEIPT_FORM, MessagesConstants.SEND_NEW_RECEIPT_CONFIRM)">
-            Uložit recept
-        </button>
-        <button class="btn btn-danger float-right"
-                (click)="openSharedModal(ButtonActionEnum.RESET_RECEIPT_FORM, MessagesConstants.RESET_RECEIPT_FORM)">
-            Vymazat
-            formulář
-        </button>
-    </form>
+        <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+      </alert>
+      <alert type="warning"
+             *ngIf="addNewReceiptForm.get('content').hasError('maxlength')">
+        Maximální délka popisu může být <strong>{{this.maxLengthVarContent}}</strong> znaků. Ve
+        vašem textu jich
+        je
+        {{addNewReceiptForm.get('content').value.length}}
+      </alert>
+    </div>
+    <!--    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid" (click)="openModal(template)">Uložit recept-->
+    <!--    </button>-->
+    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid"
+            (click)="openSharedModal(ButtonActionEnum.SEND_RECEIPT_FORM, MessagesConstants.SEND_NEW_RECEIPT_CONFIRM)">
+      Uložit recept
+    </button>
+    <button class="btn btn-danger float-right"
+            (click)="openSharedModal(ButtonActionEnum.RESET_RECEIPT_FORM, MessagesConstants.RESET_RECEIPT_FORM)">
+      Vymazat
+      formulář
+    </button>
+  </form>
 </div>
 
 <!-- modal window -->
@@ -75,5 +80,5 @@
 <!--  </div>-->
 <!--</ng-template>-->
 <app-receipt-form-message
-        [show_msg_input]=MessagesConstants.SEND_NEW_RECEIPT_CONFIRM>
+  [showMsgInput]="MessagesConstants.SEND_NEW_RECEIPT_CONFIRM">
 </app-receipt-form-message>

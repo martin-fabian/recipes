@@ -1,21 +1,18 @@
-import {Injectable, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {Observable, Subject} from "rxjs";
-import {ButtonActionEnum} from "../../constants/button-action.enum";
-import {MessagesConstants} from "../../constants/messages.constants";
+import {Injectable, OnDestroy} from '@angular/core';
+import {Subject} from 'rxjs';
+import {ButtonActionEnum} from '../../constants/button-action.enum';
+import {MessagesConstants} from '../../constants/messages.constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModalMessageService implements OnInit, OnDestroy {
+export class ModalMessageService implements OnDestroy {
 
   subscriptionModalWindow = new Subject<any>();
   onConfirmSubscriptionModalWindow = new Subject<boolean>();
   onResetSubscriptionModalWindow = new Subject<boolean>();
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
@@ -27,8 +24,8 @@ export class ModalMessageService implements OnInit, OnDestroy {
 
   triggerOpenModalWindow(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {
     this.subscriptionModalWindow.next({
-      typeOfAction: typeOfAction,
-      messageTitleModal: messageTitleModal
+      typeOfAction,
+      messageTitleModal
     });
   }
 
