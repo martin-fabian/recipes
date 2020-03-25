@@ -1,13 +1,13 @@
-import {Injectable, OnInit} from '@angular/core';
-import {ReceiptEntity} from "../entity/receipt.entity";
-import {Observable, of} from "rxjs";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {RouterConstants} from "../../../constants/router.constants";
+import {Injectable} from '@angular/core';
+import {ReceiptEntity} from '../entity/receipt.entity';
+import {Observable, of} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {RouterConstants} from '../../../constants/router.constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReceiptService implements OnInit {
+export class ReceiptService {
 
   receipts: ReceiptEntity[] = [{
     name: 'Skvělá brokolicová polévka',
@@ -41,8 +41,6 @@ export class ReceiptService implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-  ngOnInit(): void {
-  }
 
   getReceiptsList(): Observable<ReceiptEntity[]> {
     return of(this.receipts);
@@ -53,7 +51,7 @@ export class ReceiptService implements OnInit {
   }
 
   addReceipt(receipt: ReceiptEntity) {
-    return this.http.post(RouterConstants.BASE_URL, receipt)
+    return this.http.post(RouterConstants.BASE_URL, receipt);
   }
 
   getSelectedReceipts(): ReceiptEntity {
