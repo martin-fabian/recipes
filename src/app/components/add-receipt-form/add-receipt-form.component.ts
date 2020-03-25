@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 import {Router} from '@angular/router';
@@ -7,6 +7,7 @@ import {MessagesConstants} from '../../constants/messages.constants';
 import {RouterConstants} from '../../constants/router.constants';
 import {ModalMessageService} from '../services/modal-message.service';
 import {ButtonActionEnum} from '../../constants/button-action.enum';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-add-receipt-form',
@@ -14,7 +15,7 @@ import {ButtonActionEnum} from '../../constants/button-action.enum';
   styleUrls: ['./add-receipt-form.component.scss']
 })
 
-export class AddReceiptFormComponent implements OnInit {
+export class AddReceiptFormComponent implements OnInit, OnDestroy {
 
   private modalRef: BsModalRef;
   public MessagesConstants = MessagesConstants;
@@ -27,6 +28,7 @@ export class AddReceiptFormComponent implements OnInit {
   public alertMaxSize = false;
   public alertImageType = false;
   private formData: FormData;
+  private subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private route: Router, private receipService: ReceiptService,
               private modalMessageService: ModalMessageService) {
@@ -42,8 +44,14 @@ export class AddReceiptFormComponent implements OnInit {
       content: new FormControl('', Validators.compose(
         [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
     });
-    this.modalMessageService.onConfirmSubscriptionModalWindow.subscribe(() => this.confirm());
-    this.modalMessageService.onResetSubscriptionModalWindow.subscribe(() => this.decline());
+    this.subscription.push(this.modalMessageService.onConfirmSubscriptionModalWindow.subscribe(
+      () => this.confirm()));
+    this.subscription.push(this.modalMessageService.onResetSubscriptionModalWindow.subscribe(
+      () => this.decline()));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach((subs) => subs.unsubscribe());
   }
 
   openModal(template: TemplateRef<any>) {

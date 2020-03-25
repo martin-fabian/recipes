@@ -1,15 +1,16 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {Router} from '@angular/router';
 import {RouterConstants} from '../../constants/router.constants';
 import {ModalMessageService} from '../services/modal-message.service';
 import {ButtonActionEnum} from '../../constants/button-action.enum';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-receipt-form-message',
   templateUrl: './receipt-form-message.component.html'
 })
-export class ReceiptFormMessageComponent implements OnInit {
+export class ReceiptFormMessageComponent implements OnInit, OnDestroy {
 
   private modalRef: BsModalRef;
   @Input() showMsgInput: string;
@@ -17,9 +18,10 @@ export class ReceiptFormMessageComponent implements OnInit {
   @ViewChild('template', {static: true}) input: ElementRef;
   public ButtonActionEnum = ButtonActionEnum;
   public typeOfAction: string;
+  private subscription: Subscription;
 
   ngOnInit(): void {
-    this.modalMessageService.subscriptionModalWindow.subscribe(data => {
+    this.subscription = this.modalMessageService.subscriptionModalWindow.subscribe(data => {
       console.log('data z subscribe ' + data);
       this.openModal(data);
     });
@@ -47,5 +49,9 @@ export class ReceiptFormMessageComponent implements OnInit {
   confirmReset() {
     this.modalRef.hide();
     this.modalMessageService.onResetModalAction();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
