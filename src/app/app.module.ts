@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {HttpClientModule} from '@angular/common/http';
 import {AlertModule} from 'ngx-bootstrap';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {AlertModule} from 'ngx-bootstrap';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     ComponentModule,
     AppRoutingModule,
     BrowserAnimationsModule,

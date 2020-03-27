@@ -28,17 +28,23 @@
     </div>
     <div class="form-group">
       <div class="custom-file">
-        <input type="file" class="custom-file-input" id="exampleFormControlFile1"
-               formControlName="image"
+        <input type="file" class="custom-file-input" id="exampleFormControlFile1" formControlName="image"
                (change)="onSelectFile($event)" accept=".jpg,.jpeg,.png">
+        <label for="exampleFormControlFile1" class="custom-file-label">{{this.filename}}</label>
         <alert type="danger" *ngIf="alertMaxSize">Maximální velikost obrázku může být 2Mb</alert>
         <alert type="danger" *ngIf="alertImageType">Vložený soubor není obrázek, vložte prosím ve formátu
           <strong> .jpg,.jpeg,.png"</strong>
         </alert>
-        <label for="exampleFormControlFile1" class="custom-file-label">{{this.filename}}</label>
+        <alert type="warning"
+               *ngIf="addNewReceiptForm.get('image').hasError('maxlength')">
+          Maximální délka názvu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve vašem
+          názvu jich je {{this.filename.length}}
+        </alert>
       </div>
     </div>
-    <img [src]="imageBase64" height="250px" width="150" [hidden]="!imageBase64" alt="obrázek receptu"/>
+    <img [src]="imageBase64" height="250px" width="150" [hidden]="!imageBase64"
+         alt="obrázek receptu"/>
+    <button *ngIf="imageBase64" class="btn btn-dark align-bottom" (click)="onDeleteImage()">Smazat obrázek</button>
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Popis receptu</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
