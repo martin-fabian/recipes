@@ -40,7 +40,7 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
       name: new FormControl('', Validators.compose(
         [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
       category: new FormControl(''),
-      image: new FormControl(''),
+      image: new FormControl('', Validators.maxLength(this.maxLengthVarName)),
       content: new FormControl('', Validators.compose(
         [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
     });
@@ -90,6 +90,7 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
   onSelectFile(event) { // called each time file input changes
     const file = event.target.files;
     this.filename = file[0].name;
+    console.log(this.filename);
     if (file && file[0]) {
       const mimeType = file[0].type;
       if (mimeType.match(/image\/*/) == null) {
@@ -104,7 +105,7 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
         this.imageBase64 = e.target.result;
-        // this.addNewReceiptForm.patchValue({image: e.target.result});
+        console.log(this.filename.length);
       };
       fileReader.readAsDataURL(file[0]);
     } else {
@@ -118,5 +119,10 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
     console.log('Vymazat....');
   }
 
+  onDeleteImage() {
+    this.addNewReceiptForm.patchValue({image: ''});
+    this.imageBase64 = '';
+    this.filename = 'Vložit obrázek';
+  }
 }
 
