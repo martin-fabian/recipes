@@ -11,6 +11,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {ReceiptFormMessageComponent} from './modal-messiging/receipt-form-message.component';
 import {AlertModule, TabsModule} from 'ngx-bootstrap';
 import {AboutUsComponent} from './about-us/about-us.component';
+import {DotsPipe} from '../pipes/dots.pipe';
 
 
 const components = [
@@ -24,17 +25,18 @@ const components = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule,
-    BrowserModule,
-    ReactiveFormsModule,
-    FormsModule,
-    TabsModule,
-    AlertModule
-  ],
+    imports: [
+        RouterModule,
+        BrowserModule,
+        ReactiveFormsModule,
+        FormsModule,
+        TabsModule,
+        AlertModule
+    ],
   declarations: [
     ...components,
-    AboutUsComponent
+    AboutUsComponent,
+    DotsPipe
   ],
   providers: [],
   exports: [

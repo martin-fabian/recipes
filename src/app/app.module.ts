@@ -26,6 +26,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   ],
   providers: [],
   schemas: [NO_ERRORS_SCHEMA],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
