@@ -2,11 +2,11 @@
 <ng-template #template>
   <div class="modal-body text-center">
     <p>{{showMsgInput}}</p>
-    <button *ngIf="typeOfAction === ButtonActionEnum.SEND_RECEIPT_FORM" type="button"
+    <button *ngIf="typeOfAction === ButtonActionEnum.SEND_RECIPE_FORM" type="button"
             class="btn btn-primary"
             (click)="confirm()">Ano
     </button>
-    <button *ngIf="typeOfAction === ButtonActionEnum.RESET_RECEIPT_FORM" type="button"
+    <button *ngIf="typeOfAction === ButtonActionEnum.RESET_RECIPE_FORM" type="button"
             class="btn btn-danger"
             (click)="confirmReset()">Ano
     </button>

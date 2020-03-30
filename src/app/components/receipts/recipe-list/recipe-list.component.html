@@ -1,0 +1,14 @@
+<h5 class="card-header">Přehled posledních přidaných receptů</h5>
+<div class="recipe-list-empty" *ngIf="recipes && recipes.length == 0">Nebyl nalezen žádný
+  recept
+</div>
+<ul *ngFor="let recipe of recipes; let i = index" class="recipe-list pointer" [routerLink]="['detail/',recipe.id]">
+  <li class="text-monospace font-weight-bold"><span
+    style="margin-right: 5px">{{(i + 1 + '.').toString()}}</span>{{recipe.name | dots: 20}}</li>
+  <li class="text-monospace">Kategorie: {{recipe.category}}</li>
+  <br/>
+  <li><img [src]=recipe.img alt="foto"></li>
+  <br/>
+  <li class="font-weight-light">{{recipe.content}}</li>
+</ul>
+

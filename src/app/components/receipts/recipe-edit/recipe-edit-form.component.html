@@ -63,7 +63,7 @@
         {{addNewRecipeForm.get('content').value.length}}
       </alert>
     </div>
-    <!--    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid" (click)="openModal(template)">Uložit recept-->
+    <!--    <button class="btn btn-primary" [disabled]="!addNewRecipeForm.valid" (click)="openModal(template)">Uložit recept-->
     <!--    </button>-->
     <button class="btn btn-primary" [disabled]="!addNewRecipeForm.valid"
             (click)="openSharedModal(ButtonActionEnum.SEND_RECIPE_FORM, MessagesConstants.SEND_NEW_RECIPE_CONFIRM)">
@@ -80,7 +80,7 @@
 <!-- modal window -->
 <!--<ng-template #template>-->
 <!--  <div class="modal-body text-center">-->
-<!--    <p>{{MessagesConstants.SEND_NEW_RECEIPT_CONFIRM}}</p>-->
+<!--    <p>{{MessagesConstants.SEND_NEW_RECIPE_CONFIRM}}</p>-->
 <!--    <button type="button" class="btn btn-primary" (click)="confirm()">Ano</button>-->
 <!--    <button type="button" class="btn btn-default" (click)="decline()">Ne</button>-->
 <!--  </div>-->
