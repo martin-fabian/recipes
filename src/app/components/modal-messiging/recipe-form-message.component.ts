@@ -7,10 +7,10 @@ import {ButtonActionEnum} from '../../constants/button-action.enum';
 import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'app-receipt-form-message',
-  templateUrl: './receipt-form-message.component.html'
+  selector: 'app-recipe-form-message',
+  templateUrl: './recipe-form-message.component.html'
 })
-export class ReceiptFormMessageComponent implements OnInit, OnDestroy {
+export class RecipeFormMessageComponent implements OnInit, OnDestroy {
 
   private modalRef: BsModalRef;
   @Input() showMsgInput: string;

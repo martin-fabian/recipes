@@ -1,23 +1,21 @@
-import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
-import {Router} from '@angular/router';
-import {RecipeService} from '../receipts/recipe-service/recipe.service';
-import {MessagesConstants} from '../../constants/messages.constants';
-import {RouterConstants} from '../../constants/router.constants';
-import {ModalMessageService} from '../services/modal-message.service';
-import {ButtonActionEnum} from '../../constants/button-action.enum';
-import {Subscription} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MessagesConstants} from 'src/app/constants/messages.constants';
+import {ButtonActionEnum} from 'src/app/constants/button-action.enum';
+import {RecipeService} from '../recipe-service/recipe.service';
+import {ModalMessageService} from '../../services/modal-message.service';
+import {RouterConstants} from '../../../constants/router.constants';
 
 @Component({
-  selector: 'app-add-receipt-form',
-  templateUrl: './add-receipt-form.component.html',
-  styleUrls: ['./add-receipt-form.component.scss']
+  selector: 'app-recipe-detail',
+  templateUrl: './recipe-detail.component.html',
+  styleUrls: ['./recipe-detail.component.scss']
 })
 
-export class AddReceiptFormComponent implements OnInit, OnDestroy {
+export class RecipeDetailComponent implements OnInit, OnDestroy {
 
-  private modalRef: BsModalRef;
   public MessagesConstants = MessagesConstants;
   public ButtonActionEnum = ButtonActionEnum;
   public maxLengthVarContent = 3000;
@@ -28,37 +26,22 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
   public alertMaxSize = false;
   public alertImageType = false;
   private formData: FormData;
-  private subscription: Subscription[] = [];
+  private id: number;
+  public recipe;
 
-  constructor(private modalService: BsModalService, private route: Router, private receipService: RecipeService,
-              private modalMessageService: ModalMessageService) {
+  constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
+              private modalMessageService: ModalMessageService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.formData = new FormData();
-    this.addNewRecipeForm = new FormGroup({
-      name: new FormControl('', Validators.compose(
-        [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
-      category: new FormControl(''),
-      image: new FormControl('', Validators.maxLength(this.maxLengthVarName)),
-      content: new FormControl('', Validators.compose(
-        [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id');
+      console.log('id is ' + this.id);
     });
-    this.subscription.push(this.modalMessageService.onConfirmSubscriptionModalWindow.subscribe(
-      () => this.confirm()));
-    this.subscription.push(this.modalMessageService.onResetSubscriptionModalWindow.subscribe(
-      () => this.decline()));
+    this.recipe = this.recipeService.getSelectedRecipe(this.id);
   }
 
   ngOnDestroy(): void {
-    this.subscription.forEach((subs) => subs.unsubscribe());
-  }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
-    if (this.modalMessageService.onConfirmSubscriptionModalWindow) {
-      this.confirm();
-    }
   }
 
   openSharedModal(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {
@@ -69,7 +52,7 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
     console.log(this.addNewRecipeForm.value);
     console.log(this.toFormDataTransform(this.addNewRecipeForm.value));
     /* http call to backend with body of FormData within formData */
-    this.route.navigateByUrl(RouterConstants.BASE_URL);
+    this.router.navigateByUrl(RouterConstants.BASE_URL);
   }
 
   toFormDataTransform<T>(formValue: T) {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ReceiptEntity} from '../entity/receipt.entity';
+import {RecipeEntity} from '../entity/recipe.entity';
 import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {RouterConstants} from '../../../constants/router.constants';
@@ -7,9 +7,10 @@ import {RouterConstants} from '../../../constants/router.constants';
 @Injectable({
   providedIn: 'root'
 })
-export class ReceiptService {
+export class RecipeService {
 
-  receipts: ReceiptEntity[] = [{
+  recipes: RecipeEntity[] = [{
+    id: 1,
     name: 'Skvělá brokolicová polévka',
     category: 'bez masa',
     img: './assets/img.jpg',
@@ -19,6 +20,7 @@ export class ReceiptService {
       'Zalijeme zeleninovým či masovým vývarem (jen tak, aby ještě špičky zeleniny byly nad hladinou) a ' +
       'přivedeme k varu. Můžeme zde vyvařit i košťál brokolice. '
   }, {
+    id: 2,
     name: 'Skvělá brokolicová polévka',
     category: 'bez masa',
     img: './assets/img.jpg',
@@ -28,6 +30,7 @@ export class ReceiptService {
       'Zalijeme zeleninovým či masovým vývarem (jen tak, aby ještě špičky zeleniny byly nad hladinou) a ' +
       'přivedeme k varu. Můžeme zde vyvařit i košťál brokolice. '
   }, {
+    id: 3,
     name: 'Skvělá brokolicová polévka',
     category: 'bez masa',
     img: './assets/img.jpg',
@@ -42,19 +45,24 @@ export class ReceiptService {
   }
 
 
-  getReceiptsList(): Observable<ReceiptEntity[]> {
-    return of(this.receipts);
+  getRecipesList(): Observable<RecipeEntity[]> {
+    return of(this.recipes);
   }
 
-  getAllReceipts(): ReceiptEntity[] {
+  getAllRecipes(): RecipeEntity[] {
     return [];
   }
 
-  addReceipt(receipt: ReceiptEntity) {
-    return this.http.post(RouterConstants.BASE_URL, receipt);
+  addRecipe(recipe: RecipeEntity) {
+    return this.http.post(RouterConstants.BASE_URL, recipe);
   }
 
-  getSelectedReceipts(): ReceiptEntity {
+  getSelectedRecipes(): RecipeEntity {
     return null;
+  }
+
+  getSelectedRecipe(id: number) {
+    console.log(this.recipes[id]);
+    return this.recipes[id];
   }
 }
