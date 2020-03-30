@@ -1,23 +1,22 @@
-import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
+import {BsModalService} from 'ngx-bootstrap/modal';
 import {Router} from '@angular/router';
-import {RecipeService} from '../receipts/recipe-service/recipe.service';
-import {MessagesConstants} from '../../constants/messages.constants';
-import {RouterConstants} from '../../constants/router.constants';
-import {ModalMessageService} from '../services/modal-message.service';
-import {ButtonActionEnum} from '../../constants/button-action.enum';
 import {Subscription} from 'rxjs';
+import { MessagesConstants } from 'src/app/constants/messages.constants';
+import { ButtonActionEnum } from 'src/app/constants/button-action.enum';
+import {RecipeService} from '../recipe-service/recipe.service';
+import {ModalMessageService} from '../../services/modal-message.service';
+import {RouterConstants} from '../../../constants/router.constants';
 
 @Component({
-  selector: 'app-add-receipt-form',
-  templateUrl: './add-receipt-form.component.html',
-  styleUrls: ['./add-receipt-form.component.scss']
+  selector: 'app-recipe-edit-form',
+  templateUrl: './recipe-edit-form.component.html',
+  styleUrls: ['./recipe-edit-form.component.scss']
 })
 
-export class AddReceiptFormComponent implements OnInit, OnDestroy {
+export class RecipeEditFormComponent implements OnInit, OnDestroy {
 
-  private modalRef: BsModalRef;
   public MessagesConstants = MessagesConstants;
   public ButtonActionEnum = ButtonActionEnum;
   public maxLengthVarContent = 3000;
@@ -30,7 +29,7 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
   private formData: FormData;
   private subscription: Subscription[] = [];
 
-  constructor(private modalService: BsModalService, private route: Router, private receipService: RecipeService,
+  constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService) {
   }
 
@@ -52,13 +51,6 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.forEach((subs) => subs.unsubscribe());
-  }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-md'});
-    if (this.modalMessageService.onConfirmSubscriptionModalWindow) {
-      this.confirm();
-    }
   }
 
   openSharedModal(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {

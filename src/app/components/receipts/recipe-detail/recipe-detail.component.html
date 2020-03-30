@@ -1,0 +1,32 @@
+<div class="container recipe-detail-size">
+  <table class="table table-bordered" *ngIf="recipe">
+    <thead>
+    <tr>
+      <th>
+        Název receptu: {{recipe.name}}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Kategorie: {{recipe.category}}</td>
+    </tr>
+    <tr>
+      <td><img [src]="this.recipe.img" alt="obrázek receptu"></td>
+    </tr>
+    <tr>
+      <td>Popis: {{this.recipe.content}}</td>
+    </tr>
+    <tr>
+      <td>
+        <button class="btn btn-warning">Upravit</button>
+        <button class="btn btn-danger float-right">Smazat</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-recipe-form-message
+  [showMsgInput]="MessagesConstants.SEND_NEW_RECIPE_CONFIRM">
+</app-recipe-form-message>

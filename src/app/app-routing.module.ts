@@ -1,17 +1,19 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {HomePageComponent} from './components/home-page/home-page.component';
-import {ReceiptPageComponent} from './components/receipts/receipt-page.component';
+import {RecipePageComponent} from './components/receipts/recipe-page.component';
 import {AddReceiptFormComponent} from './components/add-receipt-form/add-receipt-form.component';
 import {AboutUsComponent} from './components/about-us/about-us.component';
+import {RecipeDetailComponent} from './components/receipts/recipe-detail/recipe-detail.component';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: HomePageComponent, pathMatch: 'full',
   },
-  {path: 'receipt', component: ReceiptPageComponent},
-  {path: 'receipt/add-receipt', component: AddReceiptFormComponent},
+  {path: 'recipe', component: RecipePageComponent},
+  {path: 'recipe/add-recipe', component: AddReceiptFormComponent},
+  {path: 'recipe/detail/:id', component: RecipeDetailComponent},
   {path: 'about-us', component: AboutUsComponent}
 ];
 
