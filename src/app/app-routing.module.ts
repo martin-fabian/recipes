@@ -11,9 +11,9 @@ const appRoutes: Routes = [
     path: '',
     component: HomePageComponent, pathMatch: 'full',
   },
-  {path: 'recipe', component: RecipePageComponent},
-  {path: 'recipe/add-recipe', component: AddReceiptFormComponent},
-  {path: 'recipe/detail/:id', component: RecipeDetailComponent},
+  {path: 'recipes/list', component: RecipePageComponent},
+  {path: 'recipes/add-recipe', component: AddReceiptFormComponent},
+  {path: 'recipes/list/:id', component: RecipeDetailComponent},
   {path: 'about-us', component: AboutUsComponent}
 ];
 

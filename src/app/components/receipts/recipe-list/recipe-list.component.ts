@@ -17,9 +17,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.recipeService.getRecipesList().subscribe(
+    this.subscription = this.recipeService.getRecipeListByUsername('username').subscribe(
       recipes => this.recipes = recipes
-    );
+      , error => console.log('error occured' + error),
+      () => console.log('completed'));
   }
 
   ngOnDestroy(): void {

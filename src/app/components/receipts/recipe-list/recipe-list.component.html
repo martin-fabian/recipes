@@ -2,7 +2,7 @@
 <div class="recipe-list-empty" *ngIf="recipes && recipes.length == 0">Nebyl nalezen žádný
   recept
 </div>
-<ul *ngFor="let recipe of recipes; let i = index" class="recipe-list pointer" [routerLink]="['detail/',recipe.id]">
+<ul *ngFor="let recipe of recipes; let i = index" class="recipe-list pointer" [routerLink]="[recipe.id]">
   <li class="text-monospace font-weight-bold"><span
     style="margin-right: 5px">{{(i + 1 + '.').toString()}}</span>{{recipe.name | dots: 20}}</li>
   <li class="text-monospace">Kategorie: {{recipe.category}}</li>
