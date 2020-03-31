@@ -7,6 +7,7 @@ import {ButtonActionEnum} from 'src/app/constants/button-action.enum';
 import {RecipeService} from '../recipe-service/recipe.service';
 import {ModalMessageService} from '../../services/modal-message.service';
 import {RouterConstants} from '../../../constants/router.constants';
+import {RecipeEntity} from '../entity/recipe.entity';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -27,7 +28,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   public alertImageType = false;
   private formData: FormData;
   private id: number;
-  public recipe;
+  public recipe: RecipeEntity;
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private route: ActivatedRoute) {
@@ -38,7 +39,11 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       this.id = +params.get('id');
       console.log('id is ' + this.id);
     });
-    this.recipe = this.recipeService.getSelectedRecipe(this.id);
+    // this.recipe = this.recipeService.getSelectedRecipe(this.id);
+    this.recipeService.getRecipeById(this.id).subscribe(recipe => {
+        this.recipe = recipe;
+      }, error => console.log('error occured' + error),
+      () => console.log('completed'));
   }
 
   ngOnDestroy(): void {
