@@ -2,9 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import { MessagesConstants } from 'src/app/constants/messages.constants';
-import { ButtonActionEnum } from 'src/app/constants/button-action.enum';
+import {MessagesConstants} from 'src/app/constants/messages.constants';
+import {ButtonActionEnum} from 'src/app/constants/button-action.enum';
 import {RecipeService} from '../recipe-service/recipe.service';
 import {ModalMessageService} from '../../services/modal-message.service';
 import {RouterConstants} from '../../../constants/router.constants';
@@ -27,7 +26,6 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   public alertMaxSize = false;
   public alertImageType = false;
   private formData: FormData;
-  private subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService) {
@@ -43,14 +41,9 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
       content: new FormControl('', Validators.compose(
         [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
     });
-    this.subscription.push(this.modalMessageService.onConfirmSubscriptionModalWindow.subscribe(
-      () => this.confirm()));
-    this.subscription.push(this.modalMessageService.onResetSubscriptionModalWindow.subscribe(
-      () => this.decline()));
   }
 
   ngOnDestroy(): void {
-    this.subscription.forEach((subs) => subs.unsubscribe());
   }
 
   openSharedModal(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {

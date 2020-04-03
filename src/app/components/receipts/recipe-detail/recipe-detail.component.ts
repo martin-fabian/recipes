@@ -8,6 +8,7 @@ import {RecipeService} from '../recipe-service/recipe.service';
 import {ModalMessageService} from '../../services/modal-message.service';
 import {RouterConstants} from '../../../constants/router.constants';
 import {RecipeEntity} from '../entity/recipe.entity';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -29,6 +30,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   private formData: FormData;
   private id: number;
   public recipe: RecipeEntity;
+  public subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private route: ActivatedRoute) {
@@ -44,6 +46,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
         this.recipe = recipe;
       }, error => console.log('error occured' + error),
       () => console.log('completed'));
+
+    this.subscription.push(this.modalMessageService.onDeleteSubscriptionModalWindow.subscribe(
+      () => this.onDeleteRecipe(this.recipe.id)));
   }
 
   ngOnDestroy(): void {
@@ -111,6 +116,27 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     this.addNewRecipeForm.patchValue({image: ''});
     this.imageBase64 = '';
     this.filename = 'Vložit obrázek';
+  }
+
+  onDeleteRecipe(id: number) {
+    /* TO DO user service to get actual user name */
+    const username = 'username';
+    const createdBy = this.recipe.createdBy;
+    if (createdBy !== username) {
+      alert('nemate pravo smazat tento recept');
+      return;
+    }
+    this.recipeService.deleteRecipe(id).subscribe(
+      (recipe) => {
+        console.log(`recipe >> ${recipe} >> was deleted`);
+        this.router.navigateByUrl(RouterConstants.RECIPES_LIST);
+      });
+  }
+
+
+  onModifyRecipe(id: number) {
+    /* TO DO */
+    console.log(id);
   }
 }
 
