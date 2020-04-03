@@ -42,7 +42,8 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
       category: new FormControl(''),
       image: new FormControl('', Validators.maxLength(this.maxLengthVarName)),
       content: new FormControl('', Validators.compose(
-        [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
+        [Validators.required, Validators.maxLength(this.maxLengthVarContent)])),
+      imageSource: new FormControl('')
     });
     this.subscription.push(this.modalMessageService.onConfirmSubscriptionModalWindow.subscribe(
       () => this.confirm()));
@@ -67,17 +68,12 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
 
   confirm(): void {
     console.log(this.addNewRecipeForm.value);
-    console.log(this.toFormDataTransform(this.addNewRecipeForm.value));
+    this.receipService.saveRecipe(this.addNewRecipeForm.value).subscribe(
+      recipes => console.log('recipes saved' + recipes)
+      , error => console.log('error occured' + error),
+      () => console.log('completed'));
     /* http call to backend with body of FormData within formData */
     this.route.navigateByUrl(RouterConstants.BASE_URL);
-  }
-
-  toFormDataTransform<T>(formValue: T) {
-    for (const key of Object.keys(formValue)) {
-      const value = formValue[key];
-      this.formData.append(key, value);
-    }
-    return this.formData;
   }
 
   decline(): void {
@@ -105,7 +101,8 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
         this.imageBase64 = e.target.result;
-        console.log(this.filename.length);
+        this.addNewRecipeForm.patchValue({imageSource: this.imageBase64});
+        console.log('e.target.result' + this.imageBase64);
       };
       fileReader.readAsDataURL(file[0]);
     } else {

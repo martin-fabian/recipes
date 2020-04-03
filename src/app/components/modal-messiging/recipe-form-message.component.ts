@@ -22,7 +22,7 @@ export class RecipeFormMessageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.modalMessageService.subscriptionModalWindow.subscribe(data => {
-      console.log('data z subscribe ' + data);
+      console.log('data z subscribe');
       this.openModal(data);
     });
   }
@@ -53,5 +53,15 @@ export class RecipeFormMessageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  confirmDelete() {
+    this.modalRef.hide();
+    this.modalMessageService.onDeleteModalAction();
+  }
+
+  confirmModify() {
+    this.modalRef.hide();
+    this.modalMessageService.onModifyModalAction();
   }
 }

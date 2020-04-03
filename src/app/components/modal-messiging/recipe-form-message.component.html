@@ -10,6 +10,14 @@
             class="btn btn-danger"
             (click)="confirmReset()">Ano
     </button>
+    <button *ngIf="typeOfAction === ButtonActionEnum.DELETE_RECIPE" type="button"
+            class="btn btn-danger"
+            (click)="confirmDelete()">Ano
+    </button>
+    <button *ngIf="typeOfAction === ButtonActionEnum.MODIFY_RECIPE" type="button"
+            class="btn btn-danger"
+            (click)="confirmModify()">Ano
+    </button>
     <button type="button" class="btn btn-secondary" (click)="decline()">Ne</button>
   </div>
 </ng-template>
