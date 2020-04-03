@@ -19,8 +19,11 @@
     </tr>
     <tr>
       <td>
-        <button class="btn btn-warning">Upravit</button>
-        <button class="btn btn-danger float-right">Smazat</button>
+        <button class="btn btn-warning" (click)="onModifyRecipe(recipe.id)">Upravit</button>
+        <!--        <button class="btn btn-danger float-right" (click)="onDeleteRecipe(recipe.id)">Smazat</button>-->
+        <button class="btn btn-danger float-right"
+                (click)="openSharedModal(ButtonActionEnum.DELETE_RECIPE,MessagesConstants.DELETE_RECIPE)">Smazat
+        </button>
       </td>
     </tr>
     </tbody>

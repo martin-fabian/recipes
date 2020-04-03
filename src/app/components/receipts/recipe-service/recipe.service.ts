@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {RecipeEntity} from '../entity/recipe.entity';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {RouterConstants} from '../../../constants/router.constants';
 import {catchError, tap} from 'rxjs/operators';
 import {error} from '@angular/compiler/src/util';
+import {RouterConstants} from '../../../constants/router.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -19,72 +19,47 @@ export class RecipeService {
     })
   };
 
-  recipes: RecipeEntity[] = [{
-    id: 1,
-    name: 'Skvělá brokolicová polévka',
-    category: 'bez masa',
-    img: './assets/img.jpg',
-    content: 'V hrnci na středním plameni orestujeme na jemno nakrájenou cibuli na másle. ' +
-      'Přidáme na malé kostky nakrájené brambory a opět zarestujeme. ' +
-      'Následně přidáme i ružičky brokolice, řádně promícháme, osolíme a opepříme. ' +
-      'Zalijeme zeleninovým či masovým vývarem (jen tak, aby ještě špičky zeleniny byly nad hladinou) a ' +
-      'přivedeme k varu. Můžeme zde vyvařit i košťál brokolice. '
-  }, {
-    id: 2,
-    name: 'Skvělá brokolicová polévka',
-    category: 'bez masa',
-    img: './assets/img.jpg',
-    content: 'V hrnci na středním plameni orestujeme na jemno nakrájenou cibuli na másle. ' +
-      'Přidáme na malé kostky nakrájené brambory a opět zarestujeme. ' +
-      'Následně přidáme i ružičky brokolice, řádně promícháme, osolíme a opepříme. ' +
-      'Zalijeme zeleninovým či masovým vývarem (jen tak, aby ještě špičky zeleniny byly nad hladinou) a ' +
-      'přivedeme k varu. Můžeme zde vyvařit i košťál brokolice. '
-  }, {
-    id: 3,
-    name: 'Skvělá brokolicová polévka',
-    category: 'bez masa',
-    img: './assets/img.jpg',
-    content: 'V hrnci na středním plameni orestujeme na jemno nakrájenou cibuli na másle. ' +
-      'Přidáme na malé kostky nakrájené brambory a opět zarestujeme. ' +
-      'Následně přidáme i ružičky brokolice, řádně promícháme, osolíme a opepříme. ' +
-      'Zalijeme zeleninovým či masovým vývarem (jen tak, aby ještě špičky zeleniny byly nad hladinou) a ' +
-      'přivedeme k varu. Můžeme zde vyvařit i košťál brokolice. '
-  }];
-
   constructor(private http: HttpClient) {
   }
 
-
-  getRecipesList(): Observable<RecipeEntity[]> {
-    return of(this.recipes);
-  }
-
   getAllRecipes(): Observable<RecipeEntity[]> {
-    return this.http.get<RecipeEntity[]>('http://localhost:8080/recipes/list').pipe(
+    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list`).pipe(
       tap(_ => console.log('fetched from backend')),
       catchError(() => error('error fetching data from backend')));
   }
 
-
-  addRecipe(recipe: RecipeEntity) {
-    return this.http.post(RouterConstants.BASE_URL, recipe);
-  }
-
-  getSelectedRecipe(id: number) {
-    console.log(this.recipes[id]);
-    return this.recipes[id];
-  }
-
   getRecipeById(id: number): Observable<RecipeEntity> {
-    return this.http.get<RecipeEntity>(`http://localhost:8080/recipes/${id}`).pipe(
+    return this.http.get<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/${id}`).pipe(
       tap(_ => console.log('fetched one recipe from backend')),
       catchError(() => error('error fetching data from backend')));
   }
 
-
   getRecipeListByUsername(username: string): Observable<RecipeEntity[]> {
-    return this.http.get<RecipeEntity[]>(`http://localhost:8080/recipes/list/${username}`).pipe(
+    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list/${username}`).pipe(
       tap(_ => console.log('fetched recipe list from backend')),
       catchError(() => error('error fetching data from backend')));
   }
+
+  saveRecipe(recipe): Observable<RecipeEntity> {
+    /* TO DO create userService to get actual username from localstorage */
+    recipe.createdBy = 'username';
+    recipe.id = Math.random() * 65530;
+    recipe.createdTimeDate = new Date();
+    recipe.img = recipe.imageSource;
+    console.log('generated id is ' + recipe.id + ' and created time is ' + recipe.createdTimeDate);
+    return this.http.post<RecipeEntity>(RouterConstants.RECIPES_BACKEND_BASE_URL + '/save', recipe).pipe(
+      tap((rec: RecipeEntity) => console.log(`added hero w/ id=${rec.id}`)),
+      catchError(() => error('error saving data to backend')));
+  }
+
+  deleteRecipe(id: number): Observable<RecipeEntity> {
+    return this.http.delete<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/delete/${id}`).pipe(
+      tap((rec: RecipeEntity) => {
+        console.log(`recipe deleted with params ${rec}`);
+      }),
+      catchError(() => {
+        error('error deleting recipe');
+      }));
+  }
 }
+
