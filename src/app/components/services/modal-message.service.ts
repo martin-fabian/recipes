@@ -15,8 +15,6 @@ export class ModalMessageService implements OnDestroy {
   onModifySubscriptionModalWindow = new Subject<boolean>();
 
   ngOnDestroy(): void {
-
-    // this.subscription.forEach((subs) => subs.unsubscribe());
     this.onConfirmSubscriptionModalWindow.unsubscribe();
     this.subscriptionModalWindow.unsubscribe();
     this.onResetSubscriptionModalWindow.unsubscribe();
