@@ -14,6 +14,7 @@ import {AboutUsComponent} from './about-us/about-us.component';
 import {DotsPipe} from '../pipes/dots.pipe';
 import {RecipeEditFormComponent} from './receipts/recipe-edit/recipe-edit-form.component';
 import {RecipeDetailComponent} from './receipts/recipe-detail/recipe-detail.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 
 const components = [
@@ -29,14 +30,15 @@ const components = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule,
-        BrowserModule,
-        ReactiveFormsModule,
-        FormsModule,
-        TabsModule,
-        AlertModule
-    ],
+  imports: [
+    RouterModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TabsModule,
+    AlertModule,
+    NgxSpinnerModule
+  ],
   declarations: [
     ...components,
     AboutUsComponent,

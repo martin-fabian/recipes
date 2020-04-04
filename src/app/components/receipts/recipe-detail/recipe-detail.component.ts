@@ -9,6 +9,7 @@ import {ModalMessageService} from '../../services/modal-message.service';
 import {RouterConstants} from '../../../constants/router.constants';
 import {RecipeEntity} from '../entity/recipe.entity';
 import {Subscription} from 'rxjs';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -33,7 +34,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   public subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
-              private modalMessageService: ModalMessageService, private route: ActivatedRoute) {
+              private modalMessageService: ModalMessageService, private route: ActivatedRoute,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription.forEach((sub) => sub.unsubscribe());
   }
 
   openSharedModal(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {
@@ -126,11 +129,13 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       alert('nemate pravo smazat tento recept');
       return;
     }
+    this.spinner.show();
     this.recipeService.deleteRecipe(id).subscribe(
       (recipe) => {
         console.log(`recipe >> ${recipe} >> was deleted`);
         this.router.navigateByUrl(RouterConstants.RECIPES_LIST);
       });
+    this.spinner.hide();
   }
 
 
