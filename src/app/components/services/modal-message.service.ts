@@ -13,12 +13,14 @@ export class ModalMessageService implements OnDestroy {
   onResetSubscriptionModalWindow = new Subject<boolean>();
   onDeleteSubscriptionModalWindow = new Subject<boolean>();
   onModifySubscriptionModalWindow = new Subject<boolean>();
+  onRegisterSubscriptionModalWindow = new Subject<boolean>();
 
   ngOnDestroy(): void {
     this.onConfirmSubscriptionModalWindow.unsubscribe();
     this.subscriptionModalWindow.unsubscribe();
     this.onResetSubscriptionModalWindow.unsubscribe();
     this.onDeleteSubscriptionModalWindow.unsubscribe();
+    this.onRegisterSubscriptionModalWindow.unsubscribe();
   }
 
   triggerOpenModalWindow(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {
@@ -42,5 +44,9 @@ export class ModalMessageService implements OnDestroy {
 
   onModifyModalAction() {
     this.onModifySubscriptionModalWindow.next(true);
+  }
+
+  onRegisterModalAction() {
+    this.onRegisterSubscriptionModalWindow.next(true);
   }
 }
