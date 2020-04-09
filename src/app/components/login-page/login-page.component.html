@@ -1,0 +1,48 @@
+<div class="container login">
+  <form [formGroup]="loginForm">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Jméno</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
+      <alert type="warning" *ngIf="loginForm.get('name').touched
+            &&loginForm.get('name').invalid
+            &&!loginForm.get('name').hasError('maxlength')">
+        <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+      </alert>
+      <alert type="warning"
+             *ngIf="loginForm.get('name').hasError('maxlength')">
+        Maximální délka názvu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve vašem
+        textu jich je
+        {{loginForm.get('name').value.length}}
+      </alert>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Heslo</label>
+      <input type="text" class="form-control" id="exampleFormControlTextarea1"
+             formControlName="password">
+      <alert type="warning"
+             *ngIf="loginForm.get('password').touched
+                   &&loginForm.get('password').invalid
+                   &&!loginForm.get('password').hasError('maxlength')">
+        <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+      </alert>
+      <div style="margin-top: 1rem">
+      <alert class="alert-margin" type="danger" *ngIf="showMsg && loginForm.touched">{{errorLoginMsg}}</alert>
+      </div>
+      <alert type="warning"
+             *ngIf="loginForm.get('password').hasError('maxlength')">
+        Maximální délka popisu může být <strong>{{this.maxLengthVarContent}}</strong> znaků. Ve
+        vašem textu jich
+        je
+        {{loginForm.get('password').value.length}}
+      </alert>
+    </div>
+    <button class="btn btn-primary" [disabled]="!loginForm.valid"
+            (click)="login()">
+      Přihlásit se
+    </button>
+    <button class="btn btn-dark float-right"
+            (click)="register()">
+      Registrovat
+    </button>
+  </form>
+</div>

@@ -5,12 +5,16 @@ import {RecipePageComponent} from './components/receipts/recipe-page.component';
 import {AddReceiptFormComponent} from './components/add-receipt-form/add-receipt-form.component';
 import {AboutUsComponent} from './components/about-us/about-us.component';
 import {RecipeDetailComponent} from './components/receipts/recipe-detail/recipe-detail.component';
+import {LoginPageComponent} from './components/login-page/login-page.component';
+import {RegisterComponent} from './components/register/register.component';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: HomePageComponent, pathMatch: 'full',
   },
+  {path: 'login', component: LoginPageComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'recipes/list', component: RecipePageComponent},
   {path: 'recipes/list/add-recipe', component: AddReceiptFormComponent},
   {path: 'recipes/list/:id', component: RecipeDetailComponent},

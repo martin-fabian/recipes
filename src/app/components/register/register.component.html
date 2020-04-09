@@ -1,0 +1,66 @@
+<div class="container register-form-view">
+  <form [formGroup]="registerForm">
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Přihlašovací jméno</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
+      <alert type="warning" *ngIf="registerForm.get('name').touched
+            &&registerForm.get('name').invalid
+            &&!registerForm.get('name').hasError('maxlength')">
+        <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+      </alert>
+      <alert type="warning"
+             *ngIf="registerForm.get('name').hasError('maxlength')">
+        Maximální délka názvu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve vašem
+        textu jich je
+        {{registerForm.get('name').value.length}}
+      </alert>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlPassword">Heslo</label>
+      <input type="text" class="form-control" id="exampleFormControlPassword" formControlName="password">
+      <alert type="warning"
+             *ngIf="registerForm.get('password').touched
+                   &&registerForm.get('password').invalid
+                   &&!registerForm.get('password').hasError('maxlength')">
+        <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
+      </alert>
+      <alert type="warning"
+             *ngIf="registerForm.get('password').hasError('maxlength')">
+        Maximální délka popisu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve
+        vašem textu jich
+        je
+        {{registerForm.get('password').value.length}}
+      </alert>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlEmail">Email</label>
+      <input type="text" class="form-control" id="exampleFormControlEmail" formControlName="email">
+      <alert type="warning"
+             *ngIf="registerForm.get('email').touched
+                   &&registerForm.get('email').invalid
+                   &&!registerForm.get('email').hasError('maxlength')">
+        <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit a musí být ve formátu email "@".
+      </alert>
+      <alert type="warning"
+             *ngIf="registerForm.get('email').hasError('maxlength')">
+        Maximální délka popisu může být <strong>{{this.maxLengthVarName}}</strong> znaků. Ve
+        vašem textu jich
+        je
+        {{registerForm.get('email').value.length}}
+      </alert>
+    </div>
+    <button class="btn btn-primary" [disabled]="!registerForm.valid"
+            (click)="openSharedModal(ButtonActionEnum.REGISTER_USER, MessagesConstants.REGISTER_USER)">
+      Registrovat
+    </button>
+    <button class="btn btn-danger float-right"
+            (click)="openSharedModal(ButtonActionEnum.RESET_RECIPE_FORM, MessagesConstants.RESET_RECIPE_FORM)">
+      Vymazat
+      formulář
+    </button>
+  </form>
+</div>
+
+<app-recipe-form-message
+  [showMsgInput]="MessagesConstants.REGISTER_USER">
+</app-recipe-form-message>
