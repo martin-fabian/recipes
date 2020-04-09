@@ -64,4 +64,9 @@ export class RecipeFormMessageComponent implements OnInit, OnDestroy {
     this.modalRef.hide();
     this.modalMessageService.onModifyModalAction();
   }
+
+  confirmRegister() {
+    this.modalRef.hide();
+    this.modalMessageService.onRegisterModalAction();
+  }
 }

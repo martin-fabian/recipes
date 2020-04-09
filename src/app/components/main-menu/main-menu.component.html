@@ -11,6 +11,8 @@
         <a class="nav-link" routerLink="about-us" routerLinkActive="active">O nás</a>
       </li>
     </ul>
+    <a class="nav-link float-right text-white shake" routerLink="login"
+       routerLinkActive="active" (click)="clearToken()">{{logged ? "Logout" : "Login"}}</a>
     <form [formGroup]="searchForm" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>

@@ -15,6 +15,8 @@ import {DotsPipe} from '../pipes/dots.pipe';
 import {RecipeEditFormComponent} from './receipts/recipe-edit/recipe-edit-form.component';
 import {RecipeDetailComponent} from './receipts/recipe-detail/recipe-detail.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {LoginPageComponent} from './login-page/login-page.component';
+import {RegisterComponent} from './register/register.component';
 
 
 const components = [
@@ -26,7 +28,9 @@ const components = [
   RecipeListComponent,
   RecipeFormMessageComponent,
   RecipeEditFormComponent,
-  RecipeDetailComponent
+  RecipeDetailComponent,
+  LoginPageComponent,
+  RegisterComponent
 ];
 
 @NgModule({
