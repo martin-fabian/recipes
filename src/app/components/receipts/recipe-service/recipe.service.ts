@@ -42,7 +42,7 @@ export class RecipeService {
 
   saveRecipe(recipe): Observable<RecipeEntity> {
     /* TO DO create userService to get actual username from localstorage */
-    recipe.createdBy = 'username';
+    recipe.createdBy = localStorage.getItem('username');
     recipe.id = Math.random() * 65530;
     recipe.createdTimeDate = new Date();
     recipe.img = recipe.imageSource;
