@@ -19,9 +19,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.subscription = this.recipeService.getRecipeListByUsername('username').subscribe(
+    this.subscription = this.recipeService.getRecipeListByUsername(localStorage.getItem('username')).subscribe(
       recipes => this.recipes = recipes
-      , error => console.log('error occured' + error),
+      , error => console.log('error occured ' + error),
       () => console.log('completed'));
     setTimeout(() => {
         this.spinner.hide();

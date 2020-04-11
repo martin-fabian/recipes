@@ -10,17 +10,22 @@ import {UserEntity} from '../entity/user.entity';
   providedIn: 'root'
 })
 export class UserService {
+  public user: UserEntity;
 
   constructor(private http: HttpClient) {
   }
 
   getUserByUsername(username: string): Observable<UserEntity> {
     return this.http.get<UserEntity>(`${RouterConstants.USERS_BACKEND_BASE_URL}/findByUsername/${username}`).pipe(
-      tap(_ => console.log(`fetched data from backend`)),
+      tap(data => {
+        console.log(`fetched data from backend`);
+        localStorage.setItem('username', data.name);
+        this.user = data;
+      }),
       catchError((_) => error(`error fetching data from backend`)));
   }
+
   registerUser(user): Observable<UserEntity> {
-    /* TO DO create userService to get actual username from localstorage */
     user.id = Math.random() * 65531;
     user.created = new Date();
     console.log('generated user id is ' + user.id + ' and created time is ' + user.created);

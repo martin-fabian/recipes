@@ -21,8 +21,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   public MessagesConstants = MessagesConstants;
   public ButtonActionEnum = ButtonActionEnum;
-  public maxLengthVarContent = 3000;
-  public maxLengthVarName = 50;
   public addNewRecipeForm: FormGroup;
   public filename = 'Vložit obrázek';
   public imageBase64: string;
@@ -32,6 +30,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   private id: number;
   public recipe: RecipeEntity;
   public subscription: Subscription[] = [];
+  registeredUserLocalStorage: string;
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private route: ActivatedRoute,
@@ -39,6 +38,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.registeredUserLocalStorage = localStorage.getItem('username');
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id');
       console.log('id is ' + this.id);
