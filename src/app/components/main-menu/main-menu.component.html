@@ -4,13 +4,16 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/" routerLinkActive="active">Recepty všech</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="logged">
         <a class="nav-link" routerLink="recipes/list" routerLinkActive="active">Moje recepty</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="about-us" routerLinkActive="active">O nás</a>
       </li>
     </ul>
+    <div *ngIf="logged" class="user-text">Vítej uživateli
+      <b>{{this.userService.user?.name}}</b></div>
+    <div *ngIf="!logged" class="user-text blink">Kuchaři, nejsi přihlášen.</div>
     <a class="nav-link float-right text-white shake" routerLink="login"
        routerLinkActive="active" (click)="clearToken()">{{logged ? "Logout" : "Login"}}</a>
     <form [formGroup]="searchForm" class="form-inline my-2 my-lg-0">

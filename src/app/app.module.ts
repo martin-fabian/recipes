@@ -8,6 +8,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {HttpClientModule} from '@angular/common/http';
 import {AlertModule} from 'ngx-bootstrap';
 import {ReactiveFormsModule} from '@angular/forms';
+import {AuthGuardService} from './components/services/auth-guard.service';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ModalModule.forRoot(),
     AlertModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuardService],
   schemas: [NO_ERRORS_SCHEMA],
   exports: [],
   bootstrap: [AppComponent]
