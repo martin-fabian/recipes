@@ -5,10 +5,11 @@ import {ComponentModule} from './components/component.module';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AlertModule} from 'ngx-bootstrap';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthGuardService} from './components/services/auth-guard.service';
+import {TokenInterceptor} from './components/interceptor/token.interceptor';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import {AuthGuardService} from './components/services/auth-guard.service';
     ModalModule.forRoot(),
     AlertModule.forRoot()
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService/*, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}*/],
   schemas: [NO_ERRORS_SCHEMA],
   exports: [],
   bootstrap: [AppComponent]
