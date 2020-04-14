@@ -15,14 +15,19 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getUserByUsername(username: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${RouterConstants.USERS_BACKEND_BASE_URL}/findByUsername/${username}`).pipe(
+  getUserByUsername(username: string, password: string): Observable<UserEntity> {
+    return this.http.get<UserEntity>(`${RouterConstants.USERS_BACKEND_BASE_URL}/findByUsername/${username}`,
+      {headers: {authorization: this.createBasicAuthLogin(username, password)}}).pipe(
       tap(data => {
         console.log(`fetched data from backend`);
         localStorage.setItem('username', data.name);
         this.user = data;
       }),
       catchError((_) => error(`error fetching data from backend`)));
+  }
+
+  createBasicAuthLogin(username, password) {
+    return 'Basic ' + window.btoa(username + ':' + password);
   }
 
   registerUser(user): Observable<UserEntity> {

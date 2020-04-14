@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   login() {
     console.log(this.loginForm.value);
-    this.sub = this.userService.getUserByUsername((this.loginForm.value.name)).subscribe((user) => {
+    this.sub = this.userService.getUserByUsername(this.loginForm.value.name, this.loginForm.value.password).subscribe((user) => {
       this.user = user;
       if (this.user && this.user.password === this.loginForm.value.password) {
         this.registered = true;

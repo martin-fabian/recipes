@@ -39,6 +39,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       this.authService.subsTokenSetUp.next(false);
       this.clearUserInMenu();
     }
+    localStorage.clear();
   }
 
   clearUserInMenu() {
