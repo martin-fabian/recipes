@@ -26,7 +26,7 @@ import {TokenInterceptor} from './components/interceptor/token.interceptor';
     ModalModule.forRoot(),
     AlertModule.forRoot()
   ],
-  providers: [AuthGuardService/*, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}*/],
+  providers: [AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   schemas: [NO_ERRORS_SCHEMA],
   exports: [],
   bootstrap: [AppComponent]

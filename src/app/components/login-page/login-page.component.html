@@ -30,7 +30,7 @@
       </div>
       <alert type="warning"
              *ngIf="loginForm.get('password').hasError('maxlength')">
-        Maximální délka popisu může být <strong>{{this.maxLengthVarContent}}</strong> znaků. Ve
+        Maximální délka popisu může být <strong>{{this.maxLengthVarPassword}}</strong> znaků. Ve
         vašem textu jich
         je
         {{loginForm.get('password').value.length}}

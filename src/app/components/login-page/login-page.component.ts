@@ -15,8 +15,8 @@ import {Subscription} from 'rxjs';
 
 export class LoginPageComponent implements OnInit, OnDestroy {
 
-  public maxLengthVarContent = 50;
-  public maxLengthVarName = 50;
+  public maxLengthVarPassword = 70;
+  public maxLengthVarName = 70;
   public loginForm: FormGroup;
   public user: UserEntity;
   private registered: boolean;
@@ -32,15 +32,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       name: new FormControl('', Validators.compose(
         [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
       password: new FormControl('', Validators.compose(
-        [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
+        [Validators.required, Validators.maxLength(this.maxLengthVarPassword)]))
     });
   }
 
   login() {
-    console.log(this.loginForm.value);
     this.sub = this.userService.getUserByUsername(this.loginForm.value.name, this.loginForm.value.password).subscribe((user) => {
       this.user = user;
-      if (this.user && this.user.password === this.loginForm.value.password) {
+      if (this.user) {
         this.registered = true;
         this.authUserService.setToken();
         this.route.navigateByUrl(RouterConstants.BASE_URL);
