@@ -6,11 +6,10 @@ import {
   HttpInterceptor, HttpHeaders
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {UserService} from '../users/user-service/user.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(private userService: UserService) {
+  constructor() {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -18,7 +17,7 @@ export class TokenInterceptor implements HttpInterceptor {
       const request = req.clone({
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          Authorization: `Basic ${window.btoa(this.userService.user.name + ':' + this.userService.user.password)}`
+          Authorization: `Basic ${window.btoa(/*this.userService.user.name*/'user' + ':' + /*this.userService.user.password*/'password')}`
         })
       });
       return next.handle(request);
