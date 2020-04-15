@@ -11,25 +11,22 @@ import {RouterConstants} from '../../../constants/router.constants';
 })
 export class RecipeService {
 
-
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Basic ' + btoa('user:password')
-    })
-  };
+  private headers;
 
   constructor(private http: HttpClient) {
   }
 
   getAllRecipes(): Observable<RecipeEntity[]> {
-    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list`).pipe(
+    this.createBasicAuthHeader();
+    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list`,
+      {headers: this.headers}).pipe(
       tap(_ => console.log('fetched from backend')),
       catchError(() => error('error fetching data from backend')));
   }
 
   getRecipeById(id: number): Observable<RecipeEntity> {
-    return this.http.get<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/${id}`).pipe(
+    return this.http.get<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/${id}`,
+      {headers: this.headers}).pipe(
       tap(_ => console.log('fetched one recipe from backend')),
       catchError(() => error('error fetching data from backend')));
   }
@@ -60,6 +57,14 @@ export class RecipeService {
       catchError(() => {
         error('error deleting recipe');
       }));
+  }
+
+  createBasicAuthHeader() {
+    const username = 'user';
+    const password = 'password';
+    this.headers = new HttpHeaders({
+      Authorization: 'Basic ' + window.btoa(username + ':' + password)
+    });
   }
 }
 

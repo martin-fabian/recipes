@@ -123,7 +123,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   onDeleteRecipe(id: number) {
     /* TO DO user service to get actual user name */
-    const username = 'username';
+    const username = this.registeredUserLocalStorage;
     const createdBy = this.recipe.createdBy;
     if (createdBy !== username) {
       alert('nemate pravo smazat tento recept');
