@@ -11,52 +11,34 @@ import {UserEntity} from '../entity/user.entity';
 })
 export class UserService {
   public user: UserEntity;
-  private headers;
 
   constructor(private http: HttpClient) {
   }
 
-  getUserByUsername(username: string, password: string): Observable<UserEntity> {
-    this.createBasicAuthHeader();
-    return this.http.get<UserEntity>(`${RouterConstants.USERS_BACKEND_BASE_URL}/login/${username}/${password}`,
-      {headers: this.headers}).pipe(
-      tap(data => {
-        console.log(`fetched data from backend`);
-        localStorage.setItem('username', data.name);
-        this.user = data;
-      }),
-      catchError((_) => error(`error fetching data from backend`)));
+  getUserTokenFromBackend(username: string, password: string): Observable<any> {
+    return this.http.get<UserEntity>(`${RouterConstants.TOKEN_RETRIEVAL}?username=${username}&password=${password}`,
+      {observe: 'response'});
   }
 
-  // getUserByUsername(username: string, password: string): Observable<UserEntity> {
-  //   this.createBasicAuthHeader();
-  //   return this.http.get<UserEntity>(`${RouterConstants.USERS_BACKEND_BASE_URL}/findByUsername/${username}`,
-  //     {headers: this.headers}).pipe(
-  //     tap(data => {
-  //       console.log(`fetched data from backend`);
-  //       localStorage.setItem('username', data.name);
-  //       this.user = data;
-  //     }),
-  //     catchError((_) => error(`error fetching data from backend`)));
-  // }
+  getUserData(username: string, password: string): Observable<UserEntity> {
+    return this.http.get<UserEntity>(`${RouterConstants.USERS_BACKEND_BASE_URL}/loginAfterAuth?username=${username}&password=${password}`, {
+      headers: new HttpHeaders({
+        Authorization: localStorage.getItem('usertoken')
+      })
 
-  createBasicAuthHeader() {
-    const username = 'user';
-    const password = 'password';
-    this.headers = new HttpHeaders({
-      Authorization: 'Basic ' + window.btoa(username + ':' + password)
-    });
+    }).pipe(tap(user => {
+      this.user = user;
+      localStorage.setItem('username', user.name);
+    }));
   }
 
   registerUser(user): Observable<UserEntity> {
-    this.createBasicAuthHeader();
     user.id = Math.random() * 65531;
     user.created = new Date();
-    return this.http.post<UserEntity>(RouterConstants.USERS_BACKEND_BASE_URL + '/register', user,
-      {headers: this.headers}).pipe(
-      tap((rec: UserEntity) => console.log(`added user w/ id=${rec.id}`)),
+    return this.http.post<UserEntity>(RouterConstants.USERS_BACKEND_BASE_URL + '/register', user
+    ).pipe(
+      tap((rec: UserEntity) => console.log(`added user w / id =${rec.id}`)),
       catchError(() => error('error saving user data to backend')));
   }
-
 }
 

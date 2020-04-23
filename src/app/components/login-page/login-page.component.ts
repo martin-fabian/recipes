@@ -19,7 +19,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   public maxLengthVarName = 70;
   public loginForm: FormGroup;
   public user: UserEntity;
-  private registered: boolean;
   public showMsg = false;
   public errorLoginMsg = 'Špatné přihlašovací údaje';
   private sub: Subscription = null;
@@ -37,18 +36,22 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.sub = this.userService.getUserByUsername(this.loginForm.value.name, this.loginForm.value.password).subscribe((user) => {
-      this.user = user;
-      if (this.user) {
-        this.registered = true;
-        this.authUserService.setToken();
-        this.route.navigateByUrl(RouterConstants.BASE_URL);
-      } else {
-        this.registered = false;
-      }
-    }, error => {
-      console.log('An error returning data from backend' + error);
-      this.showMsg = true;
+    this.sub = this.userService.getUserTokenFromBackend(this.loginForm.value.name, this.loginForm.value.password).subscribe((response) => {
+      localStorage.setItem('usertoken', response.headers.get('Authorization'));
+      console.log('Token received from backend' + response.headers.get('Authorization'));
+      console.log('getting now User object');
+      this.userService.getUserData(this.loginForm.value.name, this.loginForm.value.password).subscribe(user => {
+        this.user = user;
+        if (this.user) {
+          this.authUserService.setToken();
+          this.route.navigateByUrl(RouterConstants.BASE_URL);
+        } else {
+          console.log('User is empty');
+        }
+      }, error => {
+        console.log('An error returning data from backend' + error);
+        this.showMsg = true;
+      });
     });
   }
 

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {RecipeEntity} from '../entity/recipe.entity';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {error} from '@angular/compiler/src/util';
 import {RouterConstants} from '../../../constants/router.constants';
@@ -11,22 +11,17 @@ import {RouterConstants} from '../../../constants/router.constants';
 })
 export class RecipeService {
 
-  private headers;
-
   constructor(private http: HttpClient) {
   }
 
   getAllRecipes(): Observable<RecipeEntity[]> {
-    this.createBasicAuthHeader();
-    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list`,
-      {headers: this.headers}).pipe(
+    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list`).pipe(
       tap(_ => console.log('fetched from backend')),
       catchError(() => error('error fetching data from backend')));
   }
 
   getRecipeById(id: number): Observable<RecipeEntity> {
-    return this.http.get<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/${id}`,
-      {headers: this.headers}).pipe(
+    return this.http.get<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/${id}`).pipe(
       tap(_ => console.log('fetched one recipe from backend')),
       catchError(() => error('error fetching data from backend')));
   }
@@ -57,14 +52,6 @@ export class RecipeService {
       catchError(() => {
         error('error deleting recipe');
       }));
-  }
-
-  createBasicAuthHeader() {
-    const username = 'user';
-    const password = 'password';
-    this.headers = new HttpHeaders({
-      Authorization: 'Basic ' + window.btoa(username + ':' + password)
-    });
   }
 }
 
