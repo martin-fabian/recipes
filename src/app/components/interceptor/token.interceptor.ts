@@ -16,9 +16,9 @@ export class TokenInterceptor implements HttpInterceptor {
     if (localStorage.getItem('usertoken') && req.url.indexOf('basicauth') === -1) {
       const request = req.clone({
         headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${window.btoa(/*this.userService.user.name*/'user' + ':' + /*this.userService.user.password*/'password')}`
-        })
+            Authorization: localStorage.getItem('usertoken')
+          }
+        )
       });
       return next.handle(request);
     } else {
