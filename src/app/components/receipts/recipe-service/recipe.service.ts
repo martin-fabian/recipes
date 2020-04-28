@@ -15,19 +15,19 @@ export class RecipeService {
   }
 
   getAllRecipes(): Observable<RecipeEntity[]> {
-    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list`).pipe(
+    return this.http.get<RecipeEntity[]>(`${RouterConstants.LOCAL_BACKEND_8080}/recipes/list`).pipe(
       tap(_ => console.log('fetched from backend')),
       catchError(() => error('error fetching data from backend')));
   }
 
   getRecipeById(id: number): Observable<RecipeEntity> {
-    return this.http.get<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/${id}`).pipe(
+    return this.http.get<RecipeEntity>(`${RouterConstants.LOCAL_BACKEND_8080}/recipes/${id}`).pipe(
       tap(_ => console.log('fetched one recipe from backend')),
       catchError(() => error('error fetching data from backend')));
   }
 
   getRecipeListByUsername(username: string): Observable<RecipeEntity[]> {
-    return this.http.get<RecipeEntity[]>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/list/${username}`).pipe(
+    return this.http.get<RecipeEntity[]>(`${RouterConstants.LOCAL_BACKEND_8080}/recipes/list/${username}`).pipe(
       tap(_ => console.log('fetched recipe list from backend')),
       catchError(() => error('error fetching data from backend')));
   }
@@ -39,13 +39,13 @@ export class RecipeService {
     recipe.createdTimeDate = new Date();
     recipe.img = recipe.imageSource;
     console.log('generated id is ' + recipe.id + ' and created time is ' + recipe.createdTimeDate);
-    return this.http.post<RecipeEntity>(RouterConstants.RECIPES_BACKEND_BASE_URL + '/save', recipe).pipe(
+    return this.http.post<RecipeEntity>(RouterConstants.LOCAL_BACKEND_8080 + '/recipes/save', recipe).pipe(
       tap((rec: RecipeEntity) => console.log(`added hero w/ id=${rec.id}`)),
       catchError(() => error('error saving data to backend')));
   }
 
   deleteRecipe(id: number): Observable<RecipeEntity> {
-    return this.http.delete<RecipeEntity>(`${RouterConstants.RECIPES_BACKEND_BASE_URL}/delete/${id}`).pipe(
+    return this.http.delete<RecipeEntity>(`${RouterConstants.LOCAL_BACKEND_8080}/recipes/delete/${id}`).pipe(
       tap((rec: RecipeEntity) => {
         console.log(`recipe deleted with params ${rec}`);
       }),
