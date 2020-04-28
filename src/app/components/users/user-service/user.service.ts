@@ -16,17 +16,18 @@ export class UserService {
   }
 
   getUserTokenFromBackend(username: string, password: string): Observable<any> {
-    return this.http.get<UserEntity>(`${RouterConstants.TOKEN_RETRIEVAL}?username=${username}&password=${password}`,
+    return this.http.get<UserEntity>(`${RouterConstants.LOCAL_BACKEND_8080}/login?username=${username}&password=${password}`,
       {observe: 'response'});
   }
 
   getUserData(username: string, password: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${RouterConstants.USERS_BACKEND_BASE_URL}/loginAfterAuth?username=${username}&password=${password}`, {
-      headers: new HttpHeaders({
-        Authorization: localStorage.getItem('usertoken')
-      })
+    return this.http.get<UserEntity>(`${RouterConstants.LOCAL_BACKEND_8080}/users/loginAfterAuth?username=${username}&password=${password}`,
+      {
+        headers: new HttpHeaders({
+          Authorization: localStorage.getItem('usertoken')
+        })
 
-    }).pipe(tap(user => {
+      }).pipe(tap(user => {
       this.user = user;
       localStorage.setItem('username', user.name);
     }));
@@ -35,7 +36,7 @@ export class UserService {
   registerUser(user): Observable<UserEntity> {
     user.id = Math.random() * 65531;
     user.created = new Date();
-    return this.http.post<UserEntity>(RouterConstants.USERS_BACKEND_BASE_URL + '/register', user
+    return this.http.post<UserEntity>(RouterConstants.LOCAL_BACKEND_8080 + '/users/register', user
     ).pipe(
       tap((rec: UserEntity) => console.log(`added user w / id =${rec.id}`)),
       catchError(() => error('error saving user data to backend')));

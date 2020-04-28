@@ -133,7 +133,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     this.recipeService.deleteRecipe(id).subscribe(
       (recipe) => {
         console.log(`recipe >> ${recipe} >> was deleted`);
-        this.router.navigateByUrl(RouterConstants.RECIPES_LIST);
+        this.router.navigateByUrl(RouterConstants.LOCAL_BACKEND_8080 + '/recipes/list');
       });
     this.spinner.hide();
   }
