@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {error} from '@angular/compiler/src/util';
-import {RouterConstants} from '../../../constants/router.constants';
 import {UserEntity} from '../entity/user.entity';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +16,12 @@ export class UserService {
   }
 
   getUserTokenFromBackend(username: string, password: string): Observable<any> {
-    return this.http.get<UserEntity>(`${RouterConstants.LOCAL_BACKEND_8080}/login?username=${username}&password=${password}`,
+    return this.http.get<UserEntity>(`${environment.backendURL}/login?username=${username}&password=${password}`,
       {observe: 'response'});
   }
 
   getUserData(username: string, password: string): Observable<UserEntity> {
-    return this.http.get<UserEntity>(`${RouterConstants.LOCAL_BACKEND_8080}/users/loginAfterAuth?username=${username}&password=${password}`,
+    return this.http.get<UserEntity>(`${environment.backendURL}/users/loginAfterAuth?username=${username}&password=${password}`,
       {
         headers: new HttpHeaders({
           Authorization: localStorage.getItem('usertoken')
@@ -36,7 +36,7 @@ export class UserService {
   registerUser(user): Observable<UserEntity> {
     user.id = Math.random() * 65531;
     user.created = new Date();
-    return this.http.post<UserEntity>(RouterConstants.LOCAL_BACKEND_8080 + '/users/register', user
+    return this.http.post<UserEntity>(environment.backendURL + '/users/register', user
     ).pipe(
       tap((rec: UserEntity) => console.log(`added user w / id =${rec.id}`)),
       catchError(() => error('error saving user data to backend')));
