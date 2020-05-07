@@ -1,12 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {BsModalService} from 'ngx-bootstrap/modal';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MessagesConstants} from 'src/app/constants/messages.constants';
 import {ButtonActionEnum} from 'src/app/constants/button-action.enum';
 import {RecipeService} from '../recipe-service/recipe.service';
 import {ModalMessageService} from '../../services/modal-message.service';
 import {RouterConstants} from '../../../constants/router.constants';
+import {RecipeEntity} from '../entity/recipe.entity';
+import {CacheService} from '../../services/cache.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-edit-form',
@@ -25,25 +28,43 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   public imageBase64: string;
   public alertMaxSize = false;
   public alertImageType = false;
-  private formData: FormData;
+  public recipe: RecipeEntity;
+  private id: number;
+  public subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
-              private modalMessageService: ModalMessageService) {
+              private modalMessageService: ModalMessageService, private cacheService: CacheService, private router: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.formData = new FormData();
-    this.addNewRecipeForm = new FormGroup({
-      name: new FormControl('', Validators.compose(
-        [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
-      category: new FormControl(''),
-      image: new FormControl('', Validators.maxLength(this.maxLengthVarName)),
-      content: new FormControl('', Validators.compose(
-        [Validators.required, Validators.maxLength(this.maxLengthVarContent)]))
-    });
+    this.subscription.push(this.router.paramMap.subscribe(params => {
+      this.id = +params.get('id');
+    }));
+    // this.recipe = this.cacheService.getRecipeFromCache();
+    this.subscription.push(this.recipeService.getRecipeById(this.id).subscribe(recipe => {
+      this.recipe = recipe;
+
+      this.addNewRecipeForm = new FormGroup({
+        name: new FormControl(this.recipe.name, Validators.compose(
+          [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
+        category: new FormControl(this.recipe.category),
+        image: new FormControl('', Validators.maxLength(this.maxLengthVarName)),
+        content: new FormControl(this.recipe.content, Validators.compose(
+          [Validators.required, Validators.maxLength(this.maxLengthVarContent)])),
+        imageSource: new FormControl(this.recipe.img)
+      });
+      this.imageBase64 = this.recipe.img;
+    }));
+    this.subscription.push(this.modalMessageService.onUpdateSubscriptionModalWindow.subscribe(() => {
+      this.confirm();
+    }));
+    this.subscription.push(this.modalMessageService.onResetSubscriptionModalWindow.subscribe(() => {
+      this.decline();
+    }));
   }
 
   ngOnDestroy(): void {
+    this.subscription.forEach(sub => sub.unsubscribe());
   }
 
   openSharedModal(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {
@@ -52,23 +73,17 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
 
   confirm(): void {
     console.log(this.addNewRecipeForm.value);
-    console.log(this.toFormDataTransform(this.addNewRecipeForm.value));
-    /* http call to backend with body of FormData within formData */
     this.route.navigateByUrl(RouterConstants.BASE_URL);
-  }
-
-  toFormDataTransform<T>(formValue: T) {
-    for (const key of Object.keys(formValue)) {
-      const value = formValue[key];
-      this.formData.append(key, value);
-    }
-    return this.formData;
   }
 
   decline(): void {
     this.imageBase64 = null;
     this.filename = 'Vložit obrázek';
     this.addNewRecipeForm.reset('', {onlySelf: true});
+  }
+
+  returnBack(): void {
+    this.route.navigateByUrl(`recipes/${this.recipe.id}`);
   }
 
 

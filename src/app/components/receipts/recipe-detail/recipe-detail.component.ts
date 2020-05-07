@@ -31,6 +31,9 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   public recipe: RecipeEntity;
   public subscription: Subscription[] = [];
   registeredUserLocalStorage: string;
+  public showNotLoggedMsg: boolean;
+  public showNotLoggedMsgString = 'Pro zobrazeni obsahu se musíte přihlásit, ' +
+    'nebo zaregistrovat. Stačí Vám k tomu pouze jméno, heslo a email.';
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private route: ActivatedRoute,
@@ -38,16 +41,21 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.showNotLoggedMsg = false;
     this.registeredUserLocalStorage = localStorage.getItem('username');
-    this.route.paramMap.subscribe(params => {
+    this.subscription.push(this.route.paramMap.subscribe(params => {
       this.id = +params.get('id');
       console.log('id is ' + this.id);
-    });
+    }));
     // this.recipe = this.recipeService.getSelectedRecipe(this.id);
-    this.recipeService.getRecipeById(this.id).subscribe(recipe => {
+    this.subscription.push(this.recipeService.getRecipeById(this.id).subscribe(recipe => {
         this.recipe = recipe;
-      }, error => console.log('error occured' + error),
-      () => console.log('completed'));
+      }, error => {
+        console.log('error occured' + error);
+        this.showNotLoggedMsgString += ': ' + error;
+        this.showNotLoggedMsg = true;
+      },
+      () => console.log('completed')));
 
     this.subscription.push(this.modalMessageService.onDeleteSubscriptionModalWindow.subscribe(
       () => this.onDeleteRecipe(this.recipe.id)));
@@ -130,18 +138,12 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       return;
     }
     this.spinner.show();
-    this.recipeService.deleteRecipe(id).subscribe(
+    this.subscription.push(this.recipeService.deleteRecipe(id).subscribe(
       (recipe) => {
-        console.log(`recipe >> ${recipe} >> was deleted`);
-        this.router.navigateByUrl(RouterConstants.LOCAL_BACKEND_8080 + '/recipes/list');
-      });
+        console.log(`recipe >> ${recipe.id} >> was deleted`);
+        this.router.navigateByUrl(RouterConstants.BASE_URL);
+      }));
     this.spinner.hide();
-  }
-
-
-  onModifyRecipe(id: number) {
-    /* TO DO */
-    console.log(id);
   }
 }
 
