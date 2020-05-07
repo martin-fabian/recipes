@@ -1,5 +1,5 @@
 <div class="container add-recipe-form-size">
-  <form [formGroup]="addNewRecipeForm">
+  <form [formGroup]="addNewRecipeForm" *ngIf="recipe && recipe.name">
     <div class="form-group">
       <label for="exampleFormControlInput1">Název receptu</label>
       <input type="text" class="form-control" id="exampleFormControlInput1" formControlName="name">
@@ -66,9 +66,10 @@
     <!--    <button class="btn btn-primary" [disabled]="!addNewRecipeForm.valid" (click)="openModal(template)">Uložit recept-->
     <!--    </button>-->
     <button class="btn btn-primary" [disabled]="!addNewRecipeForm.valid"
-            (click)="openSharedModal(ButtonActionEnum.SEND_RECIPE_FORM, MessagesConstants.SEND_NEW_RECIPE_CONFIRM)">
+            (click)="openSharedModal(ButtonActionEnum.UPDATED_RECIPE_FORM, MessagesConstants.UPDATE_RECIPE_FORM)">
       Uložit recept
     </button>
+    <button class="btn btn-dark" (click)="returnBack()">Zpět</button>
     <button class="btn btn-danger float-right"
             (click)="openSharedModal(ButtonActionEnum.RESET_RECIPE_FORM, MessagesConstants.RESET_RECIPE_FORM)">
       Vymazat
