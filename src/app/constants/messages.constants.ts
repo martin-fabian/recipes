@@ -5,4 +5,5 @@ export class MessagesConstants {
     public static readonly DELETE_RECIPE = 'Opravdu chcete recept smazat?';
     public static readonly MODIFY_RECIPE = 'Chcete recept upravit?';
     public static readonly REGISTER_USER = 'Přejete si registraci potvrdit?';
+    public static readonly UPDATE_RECIPE_FORM = 'Přejete si opravdu změny receptu odeslat k uložení?';
 }

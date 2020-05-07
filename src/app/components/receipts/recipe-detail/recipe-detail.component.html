@@ -1,4 +1,6 @@
 <div class="container recipe-detail-size">
+  <alert *ngIf="showNotLoggedMsg" type="danger" dismissOnTimeout="10000">{{ showNotLoggedMsgString }}
+  </alert>
   <table class="table table-bordered" *ngIf="recipe">
     <thead>
     <tr>
@@ -19,7 +21,7 @@
     </tr>
     <tr [hidden]="recipe.createdBy !== registeredUserLocalStorage">
       <td>
-        <button class="btn btn-warning" (click)="onModifyRecipe(recipe.id)">Upravit</button>
+        <button class="btn btn-warning" routerLink="edit">Upravit</button>
         <button class="btn btn-danger float-right"
                 (click)="openSharedModal(ButtonActionEnum.DELETE_RECIPE,MessagesConstants.DELETE_RECIPE)">Smazat
         </button>

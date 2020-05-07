@@ -52,7 +52,9 @@ export class RecipeFormMessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   confirmDelete() {
@@ -68,5 +70,10 @@ export class RecipeFormMessageComponent implements OnInit, OnDestroy {
   confirmRegister() {
     this.modalRef.hide();
     this.modalMessageService.onRegisterModalAction();
+  }
+
+  confirmUpdate() {
+    this.modalRef.hide();
+    this.modalMessageService.onUpdateModalAction();
   }
 }
