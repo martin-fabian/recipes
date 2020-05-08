@@ -34,14 +34,20 @@ export class RecipeService {
 
   saveRecipe(recipe): Observable<RecipeEntity> {
     /* TO DO create userService to get actual username from localstorage */
-    recipe.createdBy = localStorage.getItem('username');
-    recipe.id = Math.random() * 65530;
-    recipe.createdTimeDate = new Date();
-    recipe.img = recipe.imageSource;
-    console.log('generated id is ' + recipe.id + ' and created time is ' + recipe.createdTimeDate);
-    return this.http.post<RecipeEntity>(environment.backendURL + '/recipes/save', recipe).pipe(
-      tap((rec: RecipeEntity) => console.log(`added hero w/ id=${rec.id}`)),
-      catchError(() => error('error saving data to backend')));
+    if (recipe.id && recipe.createdBy && recipe.createdTimeDate) {
+      return this.http.post<RecipeEntity>(environment.backendURL + '/recipes/save', recipe).pipe(
+        tap((rec: RecipeEntity) => console.log(`recipe with id=${rec.id} sent to update`)),
+        catchError(() => error('error updating data to backend')));
+    } else {
+      recipe.createdBy = localStorage.getItem('username');
+      recipe.id = Math.random() * 65530;
+      recipe.createdTimeDate = new Date();
+      recipe.img = recipe.imageSource;
+      console.log('generated id is ' + recipe.id + ' and created time is ' + recipe.createdTimeDate);
+      return this.http.post<RecipeEntity>(environment.backendURL + '/recipes/save', recipe).pipe(
+        tap((rec: RecipeEntity) => console.log(`added hero w/ id=${rec.id}`)),
+        catchError(() => error('error saving data to backend')));
+    }
   }
 
   deleteRecipe(id: number): Observable<RecipeEntity> {
