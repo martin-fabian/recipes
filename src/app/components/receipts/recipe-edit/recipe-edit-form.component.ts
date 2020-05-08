@@ -33,7 +33,8 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   public subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
-              private modalMessageService: ModalMessageService, private cacheService: CacheService, private router: ActivatedRoute) {
+              private modalMessageService: ModalMessageService, private cacheService: CacheService,
+              private router: ActivatedRoute, private receipService: RecipeService) {
   }
 
   ngOnInit(): void {
@@ -73,6 +74,19 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
 
   confirm(): void {
     console.log(this.addNewRecipeForm.value);
+    const updatedRecipe: RecipeEntity = {
+      id: this.recipe.id,
+      createdBy: this.recipe.createdBy,
+      createdTimeDate: this.recipe.createdTimeDate,
+      name: this.addNewRecipeForm.value.name,
+      img: this.addNewRecipeForm.value.imageSource,
+      content: this.addNewRecipeForm.value.content,
+      category: this.addNewRecipeForm.value.categories
+    };
+    this.subscription.push(this.receipService.saveRecipe(updatedRecipe).subscribe(
+      recipes => console.log('recipes updated' + recipes)
+      , error => console.log('error occured while updating recipe' + error),
+      () => console.log('completed')));
     this.route.navigateByUrl(RouterConstants.BASE_URL);
   }
 
