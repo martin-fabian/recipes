@@ -20,7 +20,7 @@ const appRoutes: Routes = [
   {path: 'recipes/list', canActivate: [AuthGuardService], component: RecipePageComponent},
   {path: 'recipes/list/:id', component: RecipeDetailComponent},
   {path: 'recipes/list/:id/edit', component: RecipeEditFormComponent},
-  {path: 'recipes/list/add-recipe', component: AddReceiptFormComponent},
+  {path: 'recipes/list/add-recipe/new', component: AddReceiptFormComponent},
   {path: 'recipes/:id', component: RecipeDetailComponent},
   {path: 'recipes/:id/edit', component: RecipeEditFormComponent},
   {path: 'about-us', component: AboutUsComponent}
