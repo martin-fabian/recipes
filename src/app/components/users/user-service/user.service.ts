@@ -5,6 +5,8 @@ import {catchError, tap} from 'rxjs/operators';
 import {error} from '@angular/compiler/src/util';
 import {UserEntity} from '../entity/user.entity';
 import {environment} from '../../../../environments/environment';
+import {AlertService} from '../../services/alert.service';
+import {AlertConstants} from '../../../constants/alert.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +14,19 @@ import {environment} from '../../../../environments/environment';
 export class UserService {
   public user: UserEntity;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private alertService: AlertService) {
   }
 
   getUserTokenFromBackend(username: string, password: string): Observable<any> {
     return this.http.get<UserEntity>(`${environment.backendURL}/login?username=${username}&password=${password}`,
-      {observe: 'response'});
+      {observe: 'response'}
+    ).pipe(
+      catchError(() => {
+          this.alertService.setErrMsg(AlertConstants.BAD_LOGIN);
+          error('not valid username or password');
+        }
+      )
+    );
   }
 
   getUserData(username: string, password: string): Observable<UserEntity> {

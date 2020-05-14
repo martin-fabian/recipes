@@ -17,6 +17,7 @@ import {RecipeDetailComponent} from './receipts/recipe-detail/recipe-detail.comp
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {LoginPageComponent} from './login-page/login-page.component';
 import {RegisterComponent} from './register/register.component';
+import {AlertComponent} from './alert/alert.component';
 
 
 const components = [
@@ -30,7 +31,8 @@ const components = [
   RecipeEditFormComponent,
   RecipeDetailComponent,
   LoginPageComponent,
-  RegisterComponent
+  RegisterComponent,
+  AlertComponent
 ];
 
 @NgModule({
