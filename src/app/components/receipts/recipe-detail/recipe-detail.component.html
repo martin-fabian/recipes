@@ -1,6 +1,5 @@
 <div class="container recipe-detail-size">
-  <alert *ngIf="showNotLoggedMsg" type="danger" dismissOnTimeout="10000">{{ showNotLoggedMsgString }}
-  </alert>
+  <app-alert *ngIf="showNotLoggedMsg" [showAlertMesg]="showNotLoggedMsgString"></app-alert>
   <table class="table table-bordered" *ngIf="recipe">
     <thead>
     <tr>

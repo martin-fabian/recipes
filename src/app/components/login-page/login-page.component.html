@@ -26,7 +26,7 @@
         <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
       </alert>
       <div style="margin-top: 1rem">
-      <alert class="alert-margin" type="danger" *ngIf="showMsg && loginForm.touched">{{errorLoginMsg}}</alert>
+        <app-alert *ngIf="this.alertService.subErrorMsg" [showAlertMesg]="this.alertService.subErrorMsg"></app-alert>
       </div>
       <alert type="warning"
              *ngIf="loginForm.get('password').hasError('maxlength')">
