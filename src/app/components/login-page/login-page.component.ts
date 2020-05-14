@@ -6,6 +6,7 @@ import {AuthUserService} from '../services/auth-user.service';
 import {UserService} from '../users/user-service/user.service';
 import {UserEntity} from '../users/entity/user.entity';
 import {Subscription} from 'rxjs';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-login-page',
@@ -19,11 +20,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   public maxLengthVarName = 70;
   public loginForm: FormGroup;
   public user: UserEntity;
-  public showMsg = false;
-  public errorLoginMsg = 'Špatné přihlašovací údaje';
   private sub: Subscription = null;
 
-  constructor(private route: Router, private authUserService: AuthUserService, private userService: UserService) {
+  constructor(private route: Router, private authUserService: AuthUserService, private userService: UserService,
+              public alertService: AlertService) {
   }
 
   ngOnInit(): void {
@@ -50,7 +50,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         }
       }, error => {
         console.log('An error returning data from backend' + error);
-        this.showMsg = true;
       });
     });
   }
@@ -63,5 +62,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
+    // this.alertService.clearErrMsg();
   }
 }
