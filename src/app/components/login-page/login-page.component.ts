@@ -62,6 +62,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    // this.alertService.clearErrMsg();
+    this.alertService.clearErrMsg();
   }
 }
