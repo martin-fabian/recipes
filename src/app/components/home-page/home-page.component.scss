@@ -39,3 +39,9 @@ img {
   display: inline-block;
   transition: all 1s linear;
 }
+
+.recipe-background-img {
+  background-image: url("src/assets/css3-gradient-pattern.png");
+  background-repeat: no-repeat;
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
