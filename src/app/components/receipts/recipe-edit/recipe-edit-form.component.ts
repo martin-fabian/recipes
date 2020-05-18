@@ -97,7 +97,7 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   }
 
   returnBack(): void {
-    this.route.navigateByUrl(`recipes/${this.recipe.id}`);
+    this.route.navigateByUrl(`recipes/list/${this.recipe.id}`);
   }
 
 
