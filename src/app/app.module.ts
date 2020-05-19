@@ -10,6 +10,7 @@ import {AlertModule} from 'ngx-bootstrap';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthGuardService} from './components/services/auth-guard.service';
 import {TokenInterceptor} from './components/interceptor/token.interceptor';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {TokenInterceptor} from './components/interceptor/token.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    Ng2SearchPipeModule,
     ModalModule.forRoot(),
     AlertModule.forRoot()
   ],

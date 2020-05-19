@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormGroup} from '@angular/forms';
 import {AuthUserService} from '../services/auth-user.service';
 import {Subscription} from 'rxjs';
 import {UserService} from '../users/user-service/user.service';
+import {RecipeService} from '../receipts/recipe-service/recipe.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -14,9 +14,9 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
   public logged = false;
   private sub: Subscription;
-  searchForm = new FormGroup({});
+  public searchText: string;
 
-  constructor(private authService: AuthUserService, public userService: UserService) {
+  constructor(private authService: AuthUserService, public userService: UserService, public recipeService: RecipeService) {
   }
 
   ngOnInit() {
@@ -50,4 +50,9 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  postSearchText(searchText) {
+    this.searchText = searchText;
+    console.log('main menu text ' + this.searchText);
+    this.recipeService.searchText.next(this.searchText);
+  }
 }
