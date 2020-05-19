@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {RecipeEntity} from '../entity/recipe.entity';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {error} from '@angular/compiler/src/util';
@@ -11,12 +11,18 @@ import {environment} from '../../../../environments/environment';
 })
 export class RecipeService {
 
+  public searchText = new Subject<string>();
+  public allRecipesSaved: RecipeEntity[] = [];
+
   constructor(private http: HttpClient) {
   }
 
   getAllRecipes(): Observable<RecipeEntity[]> {
     return this.http.get<RecipeEntity[]>(`${environment.backendURL}/recipes/list`).pipe(
-      tap(_ => console.log('fetched from backend')),
+      tap(recipes => {
+        console.log('fetched from backend');
+        recipes.forEach(recipe => this.allRecipesSaved.push(recipe));
+      }),
       catchError(() => error('error fetching data from backend')));
   }
 

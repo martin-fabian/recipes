@@ -11,6 +11,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 export class HomePageComponent implements OnInit {
 
   public recipes: RecipeEntity[];
+  public searchRecipe: string;
 
   constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService) {
   }
@@ -27,5 +28,7 @@ export class HomePageComponent implements OnInit {
         this.spinner.hide();
       }, 1000
     );
+    this.recipeService.searchText.subscribe( sText => this.searchRecipe = sText);
+    console.log('text z home componnet pro hledani: ' + this.searchRecipe);
   }
 }
