@@ -13,6 +13,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
 
   recipes: RecipeEntity[];
   private subscription: Subscription;
+  public searchText: string;
 
   constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService) {
   }
@@ -27,6 +28,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
         this.spinner.hide();
       }, 1000
     );
+    this.recipeService.searchText.subscribe((txt) => this.searchText = txt);
+    console.log('search text from list component ' + this.searchText);
   }
 
   ngOnDestroy(): void {
