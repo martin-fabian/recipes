@@ -16,9 +16,11 @@
     <div *ngIf="!logged" class="user-text blink">Kuchaři, nejsi přihlášen.</div>
     <a class="nav-link float-right text-white shake" routerLink="login"
        routerLinkActive="active" (click)="clearToken()">{{logged ? "Logout" : "Login"}}</a>
+    <a class="nav-link float-right text-white shake" routerLink="register"
+       routerLinkActive="active" *ngIf="!logged">Registrovat</a>
     <div class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-             (ngModelChange)="postSearchText($event)" [ngModel]="searchText" >
+             (ngModelChange)="postSearchText($event)" [ngModel]="searchText">
     </div>
   </div>
 </nav>
