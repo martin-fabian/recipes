@@ -19,6 +19,7 @@ import {LoginPageComponent} from './login-page/login-page.component';
 import {RegisterComponent} from './register/register.component';
 import {AlertComponent} from './alert/alert.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {NgxWatermarkModule} from 'ngx-watermark';
 
 
 const components = [
@@ -37,16 +38,17 @@ const components = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule,
-        BrowserModule,
-        ReactiveFormsModule,
-        FormsModule,
-        TabsModule,
-        AlertModule,
-        NgxSpinnerModule,
-        Ng2SearchPipeModule
-    ],
+  imports: [
+    RouterModule,
+    BrowserModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TabsModule,
+    AlertModule,
+    NgxSpinnerModule,
+    Ng2SearchPipeModule,
+    NgxWatermarkModule
+  ],
   declarations: [
     ...components,
     AboutUsComponent,
