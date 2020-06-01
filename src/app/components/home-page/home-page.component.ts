@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../receipts/recipe-service/recipe.service';
 import {RecipeEntity} from '../receipts/entity/recipe.entity';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {NgxWatermarkOptions} from 'ngx-watermark';
 
 @Component({
   selector: 'app-home-page',
@@ -12,6 +13,17 @@ export class HomePageComponent implements OnInit {
 
   public recipes: RecipeEntity[];
   public searchRecipe: string;
+
+  options: NgxWatermarkOptions = {
+    text: 'Pouze pro registrované uživatele.',
+    width: 220,
+    height: 100,
+    fontSize: '14px',
+    color: '#9900EF',
+    alpha: 1,
+    degree: -25,
+    fontWeight: 'bold'
+  };
 
   constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService) {
   }
@@ -28,7 +40,7 @@ export class HomePageComponent implements OnInit {
         this.spinner.hide();
       }, 1000
     );
-    this.recipeService.searchText.subscribe( sText => this.searchRecipe = sText);
+    this.recipeService.searchText.subscribe(sText => this.searchRecipe = sText);
     console.log('text z home componnet pro hledani: ' + this.searchRecipe);
   }
 }

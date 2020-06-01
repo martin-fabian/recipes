@@ -2,13 +2,17 @@
   recept
 </div>
 <ul *ngFor="let recipe of recipes | filter: searchRecipe; let i = index" class="home-page-list pointer recipe-background-img" [routerLink]="['recipes/list/',recipe.id]">
+  <section [ngxWatermark]="options">
   <li class="text-monospace font-weight-bold"><span
     style="margin-right: 5px">{{(i + 1 + '.').toString()}}</span>{{recipe.name | dots: 20}}</li>
   <li class="text-monospace">Kategorie: {{recipe.category}}</li>
   <br/>
-  <li><img [src]=recipe.img alt="foto" class="blur"></li>
+  <li>
+    <img [src]=recipe.img alt="foto" class="blur">
+  </li>
   <br/>
   <li class="font-weight-light">{{recipe.content | dots: 100}}</li>
+  </section>
 </ul>
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" color="#fff" type="square-jelly-box" [fullScreen]="true"><p
   style="color: white"> Stahuju recepty... </p>>
