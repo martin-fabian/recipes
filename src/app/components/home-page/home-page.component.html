@@ -6,7 +6,7 @@
     style="margin-right: 5px">{{(i + 1 + '.').toString()}}</span>{{recipe.name | dots: 20}}</li>
   <li class="text-monospace">Kategorie: {{recipe.category}}</li>
   <br/>
-  <li><img [src]=recipe.img alt="foto"></li>
+  <li><img [src]=recipe.img alt="foto" class="blur"></li>
   <br/>
   <li class="font-weight-light">{{recipe.content | dots: 100}}</li>
 </ul>

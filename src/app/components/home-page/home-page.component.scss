@@ -45,3 +45,7 @@ img {
   background-repeat: no-repeat;
   background-size: cover; /* Resize the background image to cover the entire container */
 }
+
+.blur {
+  filter: blur(8px);
+}
