@@ -7,6 +7,7 @@ import {UserService} from '../users/user-service/user.service';
 import {UserEntity} from '../users/entity/user.entity';
 import {Subscription} from 'rxjs';
 import {AlertService} from '../services/alert.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +24,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   private sub: Subscription = null;
 
   constructor(private route: Router, private authUserService: AuthUserService, private userService: UserService,
-              public alertService: AlertService) {
+              public alertService: AlertService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +37,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    this.alertService.clearErrMsg();
+    this.spinner.show();
     this.sub = this.userService.getUserTokenFromBackend(this.loginForm.value.name, this.loginForm.value.password).subscribe((response) => {
       localStorage.setItem('usertoken', response.headers.get('Authorization'));
       console.log('Token received from backend' + response.headers.get('Authorization'));
@@ -44,14 +47,17 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         this.user = user;
         if (this.user) {
           this.authUserService.setToken();
+          this.spinner.hide();
           this.route.navigateByUrl(RouterConstants.BASE_URL);
         } else {
           console.log('User is empty');
+          this.spinner.hide();
         }
       }, error => {
         console.log('An error returning data from backend' + error);
+        this.spinner.hide();
       });
-    });
+    }, () => this.spinner.hide());
   }
 
   register() {

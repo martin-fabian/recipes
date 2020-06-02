@@ -1,3 +1,4 @@
+<app-alert *ngIf="this.alertService.subErrorMsg" [showAlertMesg]="this.alertService.subErrorMsg"></app-alert>
 <div class="container register-form-view">
   <form [formGroup]="registerForm">
     <div class="form-group">
