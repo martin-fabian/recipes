@@ -8,6 +8,7 @@ import {ModalMessageService} from '../services/modal-message.service';
 import {ButtonActionEnum} from '../../constants/button-action.enum';
 import {Subscription} from 'rxjs';
 import {UserService} from '../users/user-service/user.service';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-register',
@@ -24,10 +25,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private route: Router, private userService: UserService,
-              private modalMessageService: ModalMessageService) {
+              private modalMessageService: ModalMessageService, public alertService: AlertService) {
   }
 
   ngOnInit(): void {
+    this.alertService.clearErrMsg();
     this.registerForm = new FormGroup({
       name: new FormControl('', Validators.compose(
         [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
@@ -51,13 +53,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   register(): void {
+    this.alertService.clearErrMsg();
     console.log(this.registerForm.value);
     this.userService.registerUser(this.registerForm.value).subscribe(
-      user => console.log('user saved' + user)
-      , error => console.log('error occured' + error),
+      user => {
+        console.log('user saved' + user);
+        this.route.navigateByUrl(RouterConstants.BASE_URL);
+      }
+      , error => {
+        console.log('error occured' + error);
+        this.alertService.setErrMsg(error);
+      },
       () => console.log('completed'));
     /* http call to backend with body of FormData within formData */
-    this.route.navigateByUrl(RouterConstants.BASE_URL);
+
   }
 
   decline(): void {

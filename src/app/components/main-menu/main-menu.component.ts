@@ -3,6 +3,7 @@ import {AuthUserService} from '../services/auth-user.service';
 import {Subscription} from 'rxjs';
 import {UserService} from '../users/user-service/user.service';
 import {RecipeService} from '../receipts/recipe-service/recipe.service';
+import {AlertService} from '../services/alert.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -16,7 +17,8 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   public searchText: string;
 
-  constructor(private authService: AuthUserService, public userService: UserService, public recipeService: RecipeService) {
+  constructor(private authService: AuthUserService, public userService: UserService, public recipeService: RecipeService,
+              public alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -38,8 +40,10 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       localStorage.clear();
       this.authService.subsTokenSetUp.next(false);
       this.clearUserInMenu();
+      this.alertService.clearErrMsg();
     }
     localStorage.clear();
+    this.alertService.clearErrMsg();
   }
 
   clearUserInMenu() {

@@ -13,6 +13,7 @@ import {AlertConstants} from '../../../constants/alert.constants';
 })
 export class UserService {
   public user: UserEntity;
+  public error: string;
 
   constructor(private http: HttpClient, private alertService: AlertService) {
   }
@@ -48,7 +49,11 @@ export class UserService {
     return this.http.post<UserEntity>(environment.backendURL + '/users/register', user
     ).pipe(
       tap((rec: UserEntity) => console.log(`added user w / id =${rec.id}`)),
-      catchError(() => error('error saving user data to backend')));
+      catchError((err) => {
+        error('error saving user data to backend with detail: ' + err.error );
+        this.error = err.error;
+        this.alertService.setErrMsg(this.error);
+      }));
   }
 }
 
