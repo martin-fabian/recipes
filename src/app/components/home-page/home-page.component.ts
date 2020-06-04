@@ -13,9 +13,12 @@ export class HomePageComponent implements OnInit {
 
   public recipes: RecipeEntity[];
   public searchRecipe: string;
+  public localStorage: string;
+
+  public showOnlyForRegWaterMark = 'Pouze pro registrované uživatele.';
 
   options: NgxWatermarkOptions = {
-    text: 'Pouze pro registrované uživatele.',
+    text: this.showOnlyForRegWaterMark,
     width: 220,
     height: 100,
     fontSize: '14px',
@@ -25,10 +28,16 @@ export class HomePageComponent implements OnInit {
     fontWeight: 'bold'
   };
 
+
   constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
+    this.localStorage = localStorage.getItem('username');
+    if (this.localStorage !== null) {
+      this.options.text = '';
+    }
+
     this.spinner.show();
     this.recipeService.getAllRecipes().subscribe(recipes => {
       this.recipes = recipes;
