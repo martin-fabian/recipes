@@ -63,7 +63,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
         console.log('user saved' + user);
         this.spinner.hide();
         this.alertService.setMsg('Registrace proběhla úspěšně, můžete se přihlásit.', 'INFO');
-        setTimeout(() => this.route.navigateByUrl(RouterConstants.BASE_URL), 5000);
+        setTimeout(() => {
+          this.route.navigateByUrl(RouterConstants.BASE_URL);
+        }, 5000);
       }
       , error => {
         console.log('error occured' + error);
