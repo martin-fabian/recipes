@@ -10,5 +10,6 @@ import {Component, Input, ViewEncapsulation} from '@angular/core';
 export class AlertComponent {
 
   @Input() showAlertMesg: string;
+  @Input() showTitle: string;
 
 }

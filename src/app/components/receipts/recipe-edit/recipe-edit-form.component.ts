@@ -10,6 +10,7 @@ import {RouterConstants} from '../../../constants/router.constants';
 import {RecipeEntity} from '../entity/recipe.entity';
 import {CacheService} from '../../services/cache.service';
 import {Subscription} from 'rxjs';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-recipe-edit-form',
@@ -34,10 +35,11 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
 
   constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private cacheService: CacheService,
-              private router: ActivatedRoute, private receipService: RecipeService) {
+              private router: ActivatedRoute, private receipService: RecipeService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.subscription.push(this.router.paramMap.subscribe(params => {
       this.id = +params.get('id');
     }));
@@ -62,6 +64,7 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
     this.subscription.push(this.modalMessageService.onResetSubscriptionModalWindow.subscribe(() => {
       this.decline();
     }));
+    this.spinner.hide();
   }
 
   ngOnDestroy(): void {

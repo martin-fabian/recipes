@@ -23,7 +23,7 @@ export class UserService {
       {observe: 'response'}
     ).pipe(
       catchError(() => {
-          this.alertService.setErrMsg(AlertConstants.BAD_LOGIN);
+          this.alertService.setMsg(AlertConstants.BAD_LOGIN);
           error('not valid username or password');
         }
       )
@@ -52,7 +52,7 @@ export class UserService {
       catchError((err) => {
         error('error saving user data to backend with detail: ' + err.error );
         this.error = err.error;
-        this.alertService.setErrMsg(this.error);
+        this.alertService.setMsg(this.error);
       }));
   }
 }

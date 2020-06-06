@@ -26,7 +26,10 @@
         <strong>Je nám líto</strong>, ale toto pole je povinné vyplnit.
       </alert>
       <div style="margin-top: 1rem">
-        <app-alert *ngIf="this.alertService.subErrorMsg" [showAlertMesg]="this.alertService.subErrorMsg"></app-alert>
+        <app-alert *ngIf="this.alertService.subMsg"
+                   [showAlertMesg]="this.alertService.subMsg"
+                   [showTitle]="this.alertService.title ? this.alertService.title : 'CHYBA'">
+        </app-alert>
       </div>
       <alert type="warning"
              *ngIf="loginForm.get('password').hasError('maxlength')">

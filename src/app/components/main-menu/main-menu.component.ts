@@ -40,10 +40,10 @@ export class MainMenuComponent implements OnInit, OnDestroy {
       localStorage.clear();
       this.authService.subsTokenSetUp.next(false);
       this.clearUserInMenu();
-      this.alertService.clearErrMsg();
+      this.alertService.clearMsg();
     }
     localStorage.clear();
-    this.alertService.clearErrMsg();
+    this.alertService.clearMsg();
   }
 
   clearUserInMenu() {

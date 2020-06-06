@@ -10,6 +10,7 @@ import {RouterConstants} from '../../../constants/router.constants';
 import {RecipeEntity} from '../entity/recipe.entity';
 import {Subscription} from 'rxjs';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -37,10 +38,11 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private route: ActivatedRoute,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService, public alertService: AlertService) {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.showNotLoggedMsg = false;
     this.registeredUserLocalStorage = localStorage.getItem('username');
     this.subscription.push(this.route.paramMap.subscribe(params => {
@@ -50,10 +52,12 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
     // this.recipe = this.recipeService.getSelectedRecipe(this.id);
     this.subscription.push(this.recipeService.getRecipeById(this.id).subscribe(recipe => {
         this.recipe = recipe;
+        this.spinner.hide();
       }, error => {
         console.log('error occured' + error);
         this.showNotLoggedMsgString += ': ' + error;
         this.showNotLoggedMsg = true;
+        this.spinner.hide();
       },
       () => console.log('completed')));
 

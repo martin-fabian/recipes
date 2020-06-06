@@ -37,7 +37,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    this.alertService.clearErrMsg();
+    this.alertService.clearMsg();
     this.spinner.show();
     this.sub = this.userService.getUserTokenFromBackend(this.loginForm.value.name, this.loginForm.value.password).subscribe((response) => {
       localStorage.setItem('usertoken', response.headers.get('Authorization'));
@@ -68,6 +68,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    this.alertService.clearErrMsg();
+    this.alertService.clearMsg();
   }
 }
