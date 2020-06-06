@@ -11,6 +11,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {AuthGuardService} from './components/services/auth-guard.service';
 import {TokenInterceptor} from './components/interceptor/token.interceptor';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     HttpClientModule,
     Ng2SearchPipeModule,
     ModalModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   schemas: [NO_ERRORS_SCHEMA],
