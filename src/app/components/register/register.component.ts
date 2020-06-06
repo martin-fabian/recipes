@@ -9,6 +9,7 @@ import {ButtonActionEnum} from '../../constants/button-action.enum';
 import {Subscription} from 'rxjs';
 import {UserService} from '../users/user-service/user.service';
 import {AlertService} from '../services/alert.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -25,11 +26,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   constructor(private modalService: BsModalService, private route: Router, private userService: UserService,
-              private modalMessageService: ModalMessageService, public alertService: AlertService) {
+              private modalMessageService: ModalMessageService, public alertService: AlertService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
-    this.alertService.clearErrMsg();
+    this.alertService.clearMsg();
     this.registerForm = new FormGroup({
       name: new FormControl('', Validators.compose(
         [Validators.required, Validators.maxLength(this.maxLengthVarName)])),
@@ -46,6 +47,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.forEach((subs) => subs.unsubscribe());
+    this.alertService.clearMsg();
   }
 
   openSharedModal(typeOfAction: ButtonActionEnum, messageTitleModal: MessagesConstants) {
@@ -53,16 +55,20 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   register(): void {
-    this.alertService.clearErrMsg();
+    this.spinner.show();
+    this.alertService.clearMsg();
     console.log(this.registerForm.value);
     this.userService.registerUser(this.registerForm.value).subscribe(
       user => {
         console.log('user saved' + user);
-        this.route.navigateByUrl(RouterConstants.BASE_URL);
+        this.spinner.hide();
+        this.alertService.setMsg('Registrace proběhla úspěšně, můžete se přihlásit.', 'INFO');
+        setTimeout(() => this.route.navigateByUrl(RouterConstants.BASE_URL), 5000);
       }
       , error => {
         console.log('error occured' + error);
-        this.alertService.setErrMsg(error);
+        this.spinner.hide();
+        this.alertService.setMsg(error, 'CHYBA');
       },
       () => console.log('completed'));
     /* http call to backend with body of FormData within formData */

@@ -1,5 +1,8 @@
 <div class="container recipe-detail-size">
-  <app-alert *ngIf="showNotLoggedMsg" [showAlertMesg]="showNotLoggedMsgString"></app-alert>
+  <app-alert *ngIf="showNotLoggedMsg"
+             [showAlertMesg]="showNotLoggedMsgString"
+             [showTitle]="this.alertService.title ? this.alertService.title : 'CHYBA'">
+  </app-alert>
   <table class="table table-bordered" *ngIf="recipe">
     <thead>
     <tr>

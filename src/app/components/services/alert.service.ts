@@ -4,19 +4,22 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class AlertService {
+  public subMsg: string;
+  public title: string;
 
   constructor() {
   }
 
-  public subErrorMsg: string;
-
-  public setErrMsg(errMsg: string): void {
-    this.subErrorMsg = errMsg;
-    console.log('setting up alert message to: ' + this.subErrorMsg);
+  public setMsg(msg: string, title?: string): void {
+    this.subMsg = msg;
+    if (title) {
+      this.title = title;
+    }
+    console.log('setting up alert message to: ' + this.subMsg);
   }
 
-  public clearErrMsg(): void {
-    this.subErrorMsg = '';
+  public clearMsg(): void {
+    this.subMsg = '';
     console.log('alert message cleared');
   }
 }
