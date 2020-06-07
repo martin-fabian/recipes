@@ -21,6 +21,8 @@ import {AlertComponent} from './alert/alert.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {NgxWatermarkModule} from 'ngx-watermark';
 import {ReportComponent} from './report/report.component';
+import {SliderComponent} from './slider/slider.component';
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 
 
 const components = [
@@ -36,7 +38,8 @@ const components = [
   LoginPageComponent,
   RegisterComponent,
   AlertComponent,
-  ReportComponent
+  ReportComponent,
+  SliderComponent
 ];
 
 @NgModule({
@@ -49,7 +52,8 @@ const components = [
     AlertModule,
     NgxSpinnerModule,
     Ng2SearchPipeModule,
-    NgxWatermarkModule
+    NgxWatermarkModule,
+    CarouselModule.forRoot()
   ],
   declarations: [
     ...components,

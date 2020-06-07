@@ -1,6 +1,7 @@
 <div class="home-page-list-empty" *ngIf="!recipes">Nebyl nalezen žádný
   recept
 </div>
+<app-slider></app-slider>
 <ul *ngFor="let recipe of recipes | filter: searchRecipe; let i = index"
     class="home-page-list pointer recipe-background-img" [routerLink]="['recipes/list/',recipe.id]">
   <section [ngxWatermark]="options">
