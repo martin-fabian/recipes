@@ -20,6 +20,7 @@ import {RegisterComponent} from './register/register.component';
 import {AlertComponent} from './alert/alert.component';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {NgxWatermarkModule} from 'ngx-watermark';
+import {ReportComponent} from './report/report.component';
 
 
 const components = [
@@ -34,7 +35,8 @@ const components = [
   RecipeDetailComponent,
   LoginPageComponent,
   RegisterComponent,
-  AlertComponent
+  AlertComponent,
+  ReportComponent
 ];
 
 @NgModule({
