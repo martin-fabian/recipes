@@ -10,6 +10,9 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="about-us" routerLinkActive="active">O nás</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="report" routerLinkActive="active">Reportík</a>
+      </li>
     </ul>
     <div *ngIf="logged" class="user-text">Vítej uživateli
       <b>{{this.userService.user?.name}}</b></div>

@@ -1,6 +1,6 @@
 <app-alert *ngIf="this.alertService.subMsg"
            [showAlertMesg]="this.alertService.subMsg"
-           [showTitle]="this.alertService.title ? this.alertService.title : 'CHYBA'">
+           [showTitle]="this.alertService.title? this.alertService.title : 'CHYBA'">
 </app-alert>
 <div class="container register-form-view">
   <form [formGroup]="registerForm">

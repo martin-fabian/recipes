@@ -3,6 +3,7 @@ import {RecipeService} from '../receipts/recipe-service/recipe.service';
 import {RecipeEntity} from '../receipts/entity/recipe.entity';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {NgxWatermarkOptions} from 'ngx-watermark';
+import {CacheService} from '../services/cache.service';
 
 @Component({
   selector: 'app-home-page',
@@ -29,10 +30,11 @@ export class HomePageComponent implements OnInit {
   };
 
 
-  constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService) {
+  constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService, private cacheService: CacheService) {
   }
 
   ngOnInit(): void {
+    this.cacheService.resetCachedRecipes();
     this.localStorage = localStorage.getItem('username');
     if (this.localStorage !== null) {
       this.options.text = '';
@@ -41,15 +43,23 @@ export class HomePageComponent implements OnInit {
     this.spinner.show();
     this.recipeService.getAllRecipes().subscribe(recipes => {
       this.recipes = recipes;
+      this.cacheService.saveRecipesToCache(this.recipes);
       console.log('returned from backend ' + this.recipes);
-    }, error => console.error(error), () => {
+    }, error => {
+      console.error(error);
+      this.spinner.hide();
+    },
+      () => {
       console.log('success');
+      this.spinner.hide();
     });
-    setTimeout(() => {
+
+    this.recipeService.searchText.subscribe(
+      sText => {
+        this.spinner.show();
+        this.searchRecipe = sText;
         this.spinner.hide();
-      }, 1000
-    );
-    this.recipeService.searchText.subscribe(sText => this.searchRecipe = sText);
+      });
     console.log('text z home componnet pro hledani: ' + this.searchRecipe);
   }
 }

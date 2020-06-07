@@ -15,7 +15,7 @@ export class AlertService {
     if (title) {
       this.title = title;
     }
-    console.log('setting up alert message to: ' + this.subMsg);
+    console.log('setting up alert message to: ' + this.subMsg + ' and title to ' + this.title);
   }
 
   public clearMsg(): void {

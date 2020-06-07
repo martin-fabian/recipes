@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Počet všech receptů</th>
+      <th scope="col">Počet mých receptů</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        {{total | number}}
+      </td>
+      <td>
+        {{myRecipes != null ? (myRecipes | number) : "Je nutné se přihlásit"}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
