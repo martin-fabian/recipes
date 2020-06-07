@@ -11,20 +11,19 @@ export class CacheService {
   constructor() {
   }
 
-  saveRecipeToCache(recipe: RecipeEntity) {
+  saveRecipesToCache(recipe: RecipeEntity[]) {
     if (recipe != null) {
-      this.recipeCached.push(recipe);
+      this.recipeCached.push(...recipe);
     }
   }
 
-  getRecipeFromCache(): RecipeEntity {
-    if (this.recipeCached[0]) {
-      return this.recipeCached[0];
-    }
+  getRecipesFromCache(): RecipeEntity[] {
+    return this.recipeCached;
   }
+
 
   resetCachedRecipes(): void {
-    this.recipeCached = null;
+    this.recipeCached = [];
   }
 
 

@@ -9,6 +9,7 @@ import {LoginPageComponent} from './components/login-page/login-page.component';
 import {RegisterComponent} from './components/register/register.component';
 import {AuthGuardService} from './components/services/auth-guard.service';
 import {RecipeEditFormComponent} from './components/receipts/recipe-edit/recipe-edit-form.component';
+import {ReportComponent} from './components/report/report.component';
 
 const appRoutes: Routes = [
   {
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   {path: 'recipes/list/add-recipe/new', component: AddReceiptFormComponent},
   {path: 'recipes/list/:id', component: RecipeDetailComponent},
   {path: 'recipes/list', canActivate: [AuthGuardService], component: RecipePageComponent},
+  {path: 'report', component: ReportComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'about-us', component: AboutUsComponent}
