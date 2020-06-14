@@ -9,7 +9,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RecipeListComponent} from './receipts/recipe-list/recipe-list.component';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {RecipeFormMessageComponent} from './modal-messiging/recipe-form-message.component';
-import {AlertModule, TabsModule} from 'ngx-bootstrap';
+import {AlertModule, CollapseModule, TabsModule} from 'ngx-bootstrap';
 import {AboutUsComponent} from './about-us/about-us.component';
 import {DotsPipe} from '../pipes/dots.pipe';
 import {RecipeEditFormComponent} from './receipts/recipe-edit/recipe-edit-form.component';
@@ -53,7 +53,8 @@ const components = [
     NgxSpinnerModule,
     Ng2SearchPipeModule,
     NgxWatermarkModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    CollapseModule
   ],
   declarations: [
     ...components,
