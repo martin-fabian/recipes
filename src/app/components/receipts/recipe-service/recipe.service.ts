@@ -57,7 +57,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number): Observable<RecipeEntity> {
-    return this.http.delete<RecipeEntity>(`${environment.backendURL}/recipes/delete/${id}`).pipe(
+    return this.http.delete<RecipeEntity>(`${environment.backendURL}/recipes/delete/${id}/${localStorage.getItem('username')}`).pipe(
       tap((rec: RecipeEntity) => {
         console.log(`recipe deleted with params ${rec}`);
       }),
