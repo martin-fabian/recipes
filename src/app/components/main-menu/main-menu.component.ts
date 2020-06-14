@@ -16,6 +16,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
   public logged = false;
   private sub: Subscription;
   public searchText: string;
+  isCollapsed = true;
 
   constructor(private authService: AuthUserService, public userService: UserService, public recipeService: RecipeService,
               public alertService: AlertService) {
