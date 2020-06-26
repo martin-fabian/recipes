@@ -32,6 +32,9 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   public recipe: RecipeEntity;
   private id: number;
   public subscription: Subscription[] = [];
+  public showAlert: boolean;
+  public title: string;
+  public alert: string;
 
   constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private cacheService: CacheService,
@@ -39,6 +42,8 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.title = '';
+    this.showAlert = false;
     this.spinner.show();
     this.subscription.push(this.router.paramMap.subscribe(params => {
       this.id = +params.get('id');
@@ -87,10 +92,24 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
       category: this.addNewRecipeForm.value.categories
     };
     this.subscription.push(this.receipService.saveRecipe(updatedRecipe).subscribe(
-      recipes => console.log('recipes updated' + recipes)
-      , error => console.log('error occured while updating recipe' + error),
+      recipes => {
+        console.log('recipes updated' + recipes);
+        this.showAlert = true;
+        this.title = 'INFO';
+        this.alert = 'Recept byl úspěšně změněn';
+        setTimeout(() => {
+            console.log('couting down 3s');
+            this.route.navigateByUrl(RouterConstants.BASE_URL);
+          }, 3000
+        );
+      }
+      , error => {
+        console.log('error occured while updating recipe' + error);
+        this.showAlert = true;
+        this.title = 'CHYBA';
+        this.alert = 'Nastala chyba při změně receptu';
+      },
       () => console.log('completed')));
-    this.route.navigateByUrl(RouterConstants.BASE_URL);
   }
 
   decline(): void {

@@ -1,3 +1,7 @@
+<app-alert *ngIf="this.showAlert"
+           [showTitle]=this.title
+           [showAlertMesg]=this.messageAlert
+></app-alert>
 <div class="container recipe-detail-size">
   <app-alert *ngIf="showNotLoggedMsg"
              [showAlertMesg]="showNotLoggedMsgString"
@@ -23,8 +27,8 @@
     </tr>
     <tr [hidden]="recipe.createdBy !== registeredUserLocalStorage">
       <td>
-        <button class="btn btn-warning" routerLink="edit">Upravit</button>
-        <button class="btn btn-danger float-right"
+        <button class="btn btn-warning" routerLink="edit" [disabled]="title === 'INFO'">Upravit</button>
+        <button class="btn btn-danger float-right" [disabled]="title === 'INFO'"
                 (click)="openSharedModal(ButtonActionEnum.DELETE_RECIPE,MessagesConstants.DELETE_RECIPE)">Smazat
         </button>
       </td>
