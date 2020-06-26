@@ -8,6 +8,7 @@ import {RouterConstants} from '../../constants/router.constants';
 import {ModalMessageService} from '../services/modal-message.service';
 import {ButtonActionEnum} from '../../constants/button-action.enum';
 import {Subscription} from 'rxjs';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-receipt-form',
@@ -29,12 +30,16 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
   public alertImageType = false;
   private formData: FormData;
   private subscription: Subscription[] = [];
+  public title;
+  public messageAlert;
+  public showAlert;
 
   constructor(private modalService: BsModalService, private route: Router, private receipService: RecipeService,
-              private modalMessageService: ModalMessageService) {
+              private modalMessageService: ModalMessageService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
+    this.showAlert = false;
     this.formData = new FormData();
     this.addNewRecipeForm = new FormGroup({
       name: new FormControl('', Validators.compose(
@@ -53,6 +58,8 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.forEach((subs) => subs.unsubscribe());
+    this.messageAlert = '';
+    this.title = '';
   }
 
   openModal(template: TemplateRef<any>) {
@@ -67,13 +74,33 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
   }
 
   confirm(): void {
+    this.spinner.show();
     console.log(this.addNewRecipeForm.value);
     this.receipService.saveRecipe(this.addNewRecipeForm.value).subscribe(
-      recipes => console.log('recipes saved' + recipes)
-      , error => console.log('error occured' + error),
-      () => console.log('completed'));
+      recipe => {
+        this.spinner.hide();
+        console.log('recipes saved');
+        this.showAlert = true;
+        this.title = 'INFO';
+        this.messageAlert = `Recept ${recipe.name} byl uložen.`;
+        setTimeout(() => {
+            console.log('couting down 3s');
+            this.route.navigateByUrl(RouterConstants.BASE_URL);
+          }, 3000
+        );
+      }
+      , error => {
+        this.spinner.hide();
+        console.log('error occured' + error);
+        this.showAlert = true;
+        this.title = 'CHYBA';
+        this.messageAlert = 'Recept nebyl uložen, stala se chyba.';
+      },
+      () => {
+        console.log('completed');
+      });
     /* http call to backend with body of FormData within formData */
-    this.route.navigateByUrl(RouterConstants.BASE_URL);
+
   }
 
   decline(): void {

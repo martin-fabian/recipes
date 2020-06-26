@@ -51,7 +51,7 @@ export class RecipeService {
       recipe.img = recipe.imageSource;
       console.log('generated id is ' + recipe.id + ' and created time is ' + recipe.createdTimeDate);
       return this.http.post<RecipeEntity>(environment.backendURL + '/recipes/save', recipe).pipe(
-        tap((rec: RecipeEntity) => console.log(`added hero w/ id=${rec.id}`)),
+        tap((rec: RecipeEntity) => console.log(`added recipe with id=${rec.id}`)),
         catchError(() => error('error saving data to backend')));
     }
   }

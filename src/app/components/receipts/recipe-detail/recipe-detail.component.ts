@@ -35,6 +35,10 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   public showNotLoggedMsg: boolean;
   public showNotLoggedMsgString = 'Pro zobrazeni obsahu se musíte přihlásit, ' +
     'nebo zaregistrovat. Stačí Vám k tomu pouze jméno, heslo a email.';
+  public showAlert: boolean;
+  public title: string;
+  public messageAlert: string;
+
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private route: ActivatedRoute,
@@ -42,6 +46,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.showAlert = false;
     this.spinner.show();
     this.showNotLoggedMsg = false;
     this.registeredUserLocalStorage = localStorage.getItem('username');
@@ -134,6 +139,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   }
 
   onDeleteRecipe(id: number) {
+    this.spinner.show();
     /* TO DO user service to get actual user name */
     const username = this.registeredUserLocalStorage;
     const createdBy = this.recipe.createdBy;
@@ -141,13 +147,20 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
       alert('nemate pravo smazat tento recept');
       return;
     }
-    this.spinner.show();
     this.subscription.push(this.recipeService.deleteRecipe(id).subscribe(
       (recipe) => {
+        this.spinner.hide();
+        this.showAlert = true;
+        this.title = 'INFO';
+        this.messageAlert = 'Recept byl smazán.';
         console.log(`recipe >> ${recipe.id} >> was deleted`);
-        this.router.navigateByUrl(RouterConstants.BASE_URL);
-      }));
-    this.spinner.hide();
+        setTimeout(() => {
+            console.log('couting down 3s');
+            this.router.navigateByUrl(RouterConstants.BASE_URL);
+          }, 3000
+        );
+      }, () => this.spinner.hide()));
+    // this.spinner.hide();
   }
 }
 
