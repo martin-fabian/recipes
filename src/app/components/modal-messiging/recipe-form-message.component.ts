@@ -1,7 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {Router} from '@angular/router';
-import {RouterConstants} from '../../constants/router.constants';
 import {ModalMessageService} from '../services/modal-message.service';
 import {ButtonActionEnum} from '../../constants/button-action.enum';
 import {Subscription} from 'rxjs';
@@ -39,7 +38,7 @@ export class RecipeFormMessageComponent implements OnInit, OnDestroy {
   confirm(): void {
     this.modalRef.hide();
     this.modalMessageService.onConfirmModalAction();
-    this.route.navigateByUrl(RouterConstants.BASE_URL);
+    // this.route.navigateByUrl(RouterConstants.BASE_URL);
   }
 
   decline(): void {
