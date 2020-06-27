@@ -6,11 +6,11 @@ import {MessagesConstants} from 'src/app/constants/messages.constants';
 import {ButtonActionEnum} from 'src/app/constants/button-action.enum';
 import {RecipeService} from '../recipe-service/recipe.service';
 import {ModalMessageService} from '../../services/modal-message.service';
-import {RouterConstants} from '../../../constants/router.constants';
 import {RecipeEntity} from '../entity/recipe.entity';
 import {CacheService} from '../../services/cache.service';
 import {Subscription} from 'rxjs';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {SharedComponent} from '../../shared/shared.component';
 
 @Component({
   selector: 'app-recipe-edit-form',
@@ -35,6 +35,7 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   public showAlert: boolean;
   public title: string;
   public alert: string;
+  private sharedComponent: SharedComponent;
 
   constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private cacheService: CacheService,
@@ -97,11 +98,7 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
         this.showAlert = true;
         this.title = 'INFO';
         this.alert = 'Recept byl úspěšně změněn';
-        setTimeout(() => {
-            console.log('couting down 3s');
-            this.route.navigateByUrl(RouterConstants.BASE_URL);
-          }, 3000
-        );
+        this.sharedComponent.timeDelay();
       }
       , error => {
         console.log('error occured while updating recipe' + error);

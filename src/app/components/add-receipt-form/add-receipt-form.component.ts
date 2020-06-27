@@ -4,11 +4,11 @@ import {BsModalService, BsModalRef} from 'ngx-bootstrap/modal';
 import {Router} from '@angular/router';
 import {RecipeService} from '../receipts/recipe-service/recipe.service';
 import {MessagesConstants} from '../../constants/messages.constants';
-import {RouterConstants} from '../../constants/router.constants';
 import {ModalMessageService} from '../services/modal-message.service';
 import {ButtonActionEnum} from '../../constants/button-action.enum';
 import {Subscription} from 'rxjs';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {SharedComponent} from '../shared/shared.component';
 
 @Component({
   selector: 'app-add-receipt-form',
@@ -33,6 +33,7 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
   public title;
   public messageAlert;
   public showAlert;
+  private sharedComponent: SharedComponent;
 
   constructor(private modalService: BsModalService, private route: Router, private receipService: RecipeService,
               private modalMessageService: ModalMessageService, private spinner: NgxSpinnerService) {
@@ -83,11 +84,7 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
         this.showAlert = true;
         this.title = 'INFO';
         this.messageAlert = `Recept ${recipe.name} byl uložen.`;
-        setTimeout(() => {
-            console.log('couting down 3s');
-            this.route.navigateByUrl(RouterConstants.BASE_URL);
-          }, 3000
-        );
+        this.sharedComponent.timeDelay();
       }
       , error => {
         this.spinner.hide();
