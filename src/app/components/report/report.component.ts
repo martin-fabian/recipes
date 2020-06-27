@@ -28,7 +28,6 @@ export class ReportComponent implements OnInit, OnDestroy {
           this.myRecipes += 1;
           console.log('myrecipes..' + this.myRecipes);
         } else {
-          this.myRecipes = 0;
           console.log('registrovany user, ale zadne recepty 0');
         }
       });
