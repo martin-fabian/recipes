@@ -1,3 +1,5 @@
+@import 'src/styles/_colors.scss';
+
 .alert-md-color {
   background-color: #7B1FA2;
   border-color: #4A148C;
@@ -5,3 +7,10 @@
   text-align: center;
 }
 
+.alert-danger {
+  background-color: $color-invalid-field;
+  border-color: $color-invalid-field;
+  color: #fff;
+  text-align: center;
+  font-size: large;
+}

@@ -11,5 +11,6 @@ export class AlertComponent {
 
   @Input() showAlertMesg: string;
   @Input() showTitle: string;
+  @Input() alertType ? = 'md-color';
 
 }
