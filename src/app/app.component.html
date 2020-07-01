@@ -1,5 +1,11 @@
-<app-main-menu></app-main-menu>
+<header>
+  <app-main-menu></app-main-menu>
+  <app-alert [alertType]="'danger'"
+    [showAlertMesg]="'Toto je stále testovací verze, proto může být aplikace nárazově nedostupná!'"></app-alert>
+</header>
+<body>
 <router-outlet></router-outlet>
+</body>
 <footer class="footer">
   <app-footer></app-footer>
 </footer>

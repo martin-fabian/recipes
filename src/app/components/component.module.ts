@@ -64,7 +64,8 @@ const components = [
   providers: [],
   exports: [
     MainMenuComponent,
-    FooterComponent
+    FooterComponent,
+    AlertComponent
   ],
   entryComponents: []
 })
