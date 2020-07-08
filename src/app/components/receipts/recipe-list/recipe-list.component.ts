@@ -15,9 +15,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: RecipeEntity[];
   private subscription: Subscription;
   public searchText: string;
-  private sharedComponent: SharedComponent;
 
-  constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService) {
+  constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService,
+              private sharedComponent: SharedComponent) {
   }
 
   ngOnInit(): void {

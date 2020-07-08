@@ -35,7 +35,8 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 
   constructor(private modalService: BsModalService, private router: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private route: ActivatedRoute,
-              private spinner: NgxSpinnerService, public alertService: AlertService, private sharedComponent: SharedComponent) {
+              private spinner: NgxSpinnerService, public alertService: AlertService,
+              private sharedComponent: SharedComponent) {
   }
 
   ngOnInit(): void {
