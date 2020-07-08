@@ -23,8 +23,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.spinner.show();
     this.subscription = this.recipeService.getRecipeListByUsername(localStorage.getItem('username')).subscribe(
-      recipes => this.recipes = recipes
-      , error => console.log('error occured ' + error),
+      recipes => {
+        this.recipes = recipes;
+        this.spinner.hide();
+      }
+      , error => {
+        console.log('error occured ' + error);
+        this.spinner.hide();
+      },
       () => console.log('completed'));
     this.sharedComponent.timeDelay();
     this.recipeService.searchText.subscribe((txt) => this.searchText = txt);
