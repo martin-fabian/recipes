@@ -33,10 +33,10 @@ export class AddReceiptFormComponent implements OnInit, OnDestroy {
   public title;
   public messageAlert;
   public showAlert;
-  private sharedComponent: SharedComponent;
 
   constructor(private modalService: BsModalService, private route: Router, private receipService: RecipeService,
-              private modalMessageService: ModalMessageService, private spinner: NgxSpinnerService) {
+              private modalMessageService: ModalMessageService, private spinner: NgxSpinnerService,
+              private sharedComponent: SharedComponent) {
   }
 
   ngOnInit(): void {

@@ -72,12 +72,13 @@
     </div>
     <!--    <button class="btn btn-primary" [disabled]="!addNewReceiptForm.valid" (click)="openModal(template)">Uložit recept-->
     <!--    </button>-->
-    <button class="btn btn-primary" [disabled]="!addNewRecipeForm.valid"
+    <button class="btn btn-primary" [disabled]="!addNewRecipeForm.valid || this.title === 'INFO'"
             (click)="openSharedModal(ButtonActionEnum.SEND_RECIPE_FORM, MessagesConstants.SEND_NEW_RECIPE_CONFIRM)">
       Uložit recept
     </button>
     <button class="btn btn-danger float-right"
-            (click)="openSharedModal(ButtonActionEnum.RESET_RECIPE_FORM, MessagesConstants.RESET_RECIPE_FORM)">
+            (click)="openSharedModal(ButtonActionEnum.RESET_RECIPE_FORM, MessagesConstants.RESET_RECIPE_FORM)"
+            [disabled]="title === 'INFO'">
       Vymazat
       formulář
     </button>
