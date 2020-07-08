@@ -24,10 +24,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public maxLengthVarName = 50;
   public registerForm: FormGroup;
   private subscription: Subscription[] = [];
-  private sharedComponent: SharedComponent;
 
   constructor(private modalService: BsModalService, private route: Router, private userService: UserService,
-              private modalMessageService: ModalMessageService, public alertService: AlertService, private spinner: NgxSpinnerService) {
+              private modalMessageService: ModalMessageService, public alertService: AlertService,
+              private spinner: NgxSpinnerService, private sharedComponent: SharedComponent) {
   }
 
   ngOnInit(): void {

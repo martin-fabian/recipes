@@ -35,11 +35,11 @@ export class RecipeEditFormComponent implements OnInit, OnDestroy {
   public showAlert: boolean;
   public title: string;
   public alert: string;
-  private sharedComponent: SharedComponent;
 
   constructor(private modalService: BsModalService, private route: Router, private recipeService: RecipeService,
               private modalMessageService: ModalMessageService, private cacheService: CacheService,
-              private router: ActivatedRoute, private receipService: RecipeService, private spinner: NgxSpinnerService) {
+              private router: ActivatedRoute, private receipService: RecipeService, private spinner: NgxSpinnerService,
+              private sharedComponent: SharedComponent) {
   }
 
   ngOnInit(): void {
