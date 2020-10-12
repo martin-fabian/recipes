@@ -6,7 +6,7 @@ import {RouterConstants} from '../app/constants/router.constants';
 
 export const environment = {
   production: false,
-  backendURL: RouterConstants.LOCAL_BACKEND_8080
+  backendURL: RouterConstants.LOCAL_BACKEND_8081
 };
 
 /*

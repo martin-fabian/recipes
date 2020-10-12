@@ -23,6 +23,7 @@ import {NgxWatermarkModule} from 'ngx-watermark';
 import {ReportComponent} from './report/report.component';
 import {SliderComponent} from './slider/slider.component';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 
 const components = [
@@ -54,7 +55,8 @@ const components = [
     Ng2SearchPipeModule,
     NgxWatermarkModule,
     CarouselModule.forRoot(),
-    CollapseModule
+    CollapseModule,
+    FontAwesomeModule
   ],
   declarations: [
     ...components,
