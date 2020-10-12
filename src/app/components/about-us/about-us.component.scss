@@ -1,8 +1,75 @@
-img {
-  max-height: 400px;
-  max-width: 500px;
+.about-me-section {
+  background-color: #96ceb4;
+  color: white;
+  padding: 25px 15px 15px 15px;
+  font-family: Garamond, cursive;
+  font-size: 20px;
+  text-align: center;
 }
 
-.about-up-top{
-  padding-top: 40px;
+.about-me-section-left {
+  text-align: left;
 }
+
+.img-about-me {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 50%;
+}
+
+.img-about-me:hover {
+  transform: scale(0);
+  transition: .3s ease;
+}
+
+.img-me:hover {
+  transform: rotate(360deg);
+  transform-origin: center;
+  transition:  2s ease all;
+}
+
+.img-me {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  rotation: 15deg;
+  opacity: revert;
+}
+
+.experience-section {
+  background-color: #ffeead;
+  color: brown;
+  padding: 25px 15px 15px 15px;
+  font-family: Garamond, cursive;
+  font-size: 20px;
+  text-align: left;
+}
+
+.experience-section h3 {
+  text-align: center;
+}
+
+.target-section {
+  background-color: #ffcc5c;
+  color: white;
+  padding: 25px 15px 15px 15px;
+  font-family: Garamond, cursive;
+  font-size: 20px;
+  text-align: center;
+}
+
+.who-am-i {
+  text-align: center;
+  font-style: italic;
+  padding-top: 25px;
+}
+
+.who-am-i-text {
+  text-align: center;
+  font-style: italic;
+  padding-top: 25px;
+  padding-bottom: 35px;
+}
+
