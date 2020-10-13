@@ -21,7 +21,7 @@
 
 .img-about-me:hover {
   transform: scale(0);
-  transition: .3s ease;
+  transition: ease 5s;
 }
 
 .img-me:hover {
@@ -34,8 +34,9 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  rotation: 15deg;
   opacity: revert;
+  padding-top: 10px;
+  border-radius: 50%;
 }
 
 .experience-section {
@@ -71,5 +72,26 @@
   font-style: italic;
   padding-top: 25px;
   padding-bottom: 35px;
+}
+
+.dissapear-text {
+  font-family: 'Parisienne', cursive;
+  font-size:5em ;
+  text-align: left;
+  padding:25px 15px;
+}
+
+nav{
+  height: 60px;
+  padding-top: 10px;
+  font-family: 'Parisienne', cursive;
+  font-size: 20px;
+}
+
+.dissapear-button {
+  padding-bottom: 25px;
+  padding-top:25px;
+  width: 30%;
+  font-family: 'Arial', serif;
 }
 
