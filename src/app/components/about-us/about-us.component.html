@@ -1,6 +1,11 @@
-<section>
+<nav class="nav nav-pills nav-fill fixed-top bg-light">
+  <a class="nav-item nav-link" href="#whoIam">Who am I </a>
+  <a class="nav-item nav-link" href="#whereItBegin">Where did it begin</a>
+  <a class="nav-item nav-link" href="#whatIlearned">What I learned</a>
+</nav>
+<section id="whoIam">
   <div class="container-fluid">
-    <img class="img-me" src="/assets/me.png" alt="">
+    <img class="img-me" src="/assets/me2.png" alt="">
     <h2 class="who-am-i">Who am I</h2>
     <div class="who-am-i-text">Thank you for reading this content regarding myself. So "who am
       I", this is the question :-). Well as for programming world I am interested in web
@@ -8,7 +13,7 @@
     </div>
   </div>
 </section>
-<section>
+<section id="whereItBegin">
   <div class="container-fluid about-me-section">
     <h3>Where did it begin?</h3>
     <div class="row">
@@ -37,7 +42,7 @@
 </section>
 <section>
   <div class="container-fluid experience-section">
-    <h3>What I have learned?</h3>
+    <h3 id="whatIlearned">What I have learned?</h3>
     <div class="row">
       <div class="col-lg-3">
         <fa-icon [icon]="faLaptopCode"
@@ -81,6 +86,13 @@
       </div>
     </div>
   </div>
+</section>
+<section>
+  <h1 class="dissapear-text">And now let all disappear
+    <button class="btn btn-success dissapear-button" (click)="disappear()">Click me please..
+      .
+    </button>
+  </h1>
 </section>
 
 
