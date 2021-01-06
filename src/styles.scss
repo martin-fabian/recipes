@@ -2,3 +2,28 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "src/styles/shared.scss";
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* width */
+::-webkit-scrollbar {
+  width: 40px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(195, 55, 34);
+  background: linear-gradient(0deg, rgba(195, 55, 34, 0.8018557764902836) 0%, rgba(253, 194, 45, 1) 100%);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #abd27e;
+}
+
+body {
+  min-height: 100vh;
+}
+
+footer {
+  height: 5em;
+}

@@ -1,0 +1,73 @@
+.blinking-red {
+  animation: blinkingTextRed 1.2s infinite;
+  font-weight: bold;
+  font-size: x-large;
+  padding-left: 5px;
+  padding-right: 30px;
+  text-align: left;
+}
+
+.blinking-green {
+  animation: blinkingTextGreen 1.2s infinite;
+  font-weight: bold;
+  font-size: x-large;
+  padding-left: 5px;
+  padding-right: 30px;
+  text-align: left;
+}
+
+@keyframes blinkingTextRed {
+  0% {
+    color: red;
+  }
+  49% {
+    color: red;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: red;
+  }
+}
+
+@keyframes blinkingTextGreen {
+  0% {
+    color: green;
+  }
+  49% {
+    color: green;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: green;
+  }
+}
+
+.stav {
+  font-weight: bold;
+  background-color: darkorange;
+  padding-top: 5px;
+}
+
+.row {
+  margin: 0;
+  text-align: center;
+}
+
+.bg {
+  background-color: #abd27e;
+  padding-top: 5px;
+}
+
+.container {
+  padding-top: 10px;
+}
