@@ -1,22 +1,65 @@
-<div class="home-page-list-empty" *ngIf="!recipes">Nebyl nalezen žádný
-  recept
-</div>
+<!--<div class="home-page-list-empty" *ngIf="!recipes">Nebyl nalezen žádný-->
+<!--  recept-->
+<!--</div>-->
 <app-slider></app-slider>
-<ul *ngFor="let recipe of recipes | filter: searchRecipe; let i = index"
-    class="home-page-list pointer recipe-background-img" [routerLink]="['recipes/list/',recipe.id]">
-  <section [ngxWatermark]="options">
-    <li class="text-monospace font-weight-bold"><span
-      style="margin-right: 5px">{{(i + 1 + '.').toString()}}</span>{{recipe.name | dots: 20}}</li>
-    <li class="text-monospace">Kategorie: {{recipe.category}}</li>
-    <br/>
-    <li>
-      <img [src]=recipe.img alt="foto" [ngClass]="this.localStorage?'':'blur'">
-    </li>
-    <br/>
-    <li class="font-weight-light">{{recipe.content | dots: 100}}</li>
-  </section>
-</ul>
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" color="#fff" type="square-jelly-box" [fullScreen]="true"><p
-  style="color: white"> Stahuju recepty... </p>>
-</ngx-spinner>
-
+<!--<ul *ngFor="let recipe of recipes | filter: searchRecipe; let i = index"-->
+<!--    class="home-page-list pointer recipe-background-img" [routerLink]="['recipes/list/',recipe.id]">-->
+<!--  <section [ngxWatermark]="options">-->
+<!--    <li class="text-monospace font-weight-bold"><span-->
+<!--      style="margin-right: 5px">{{(i + 1 + '.').toString()}}</span>{{recipe.name | dots: 20}}</li>-->
+<!--    <li class="text-monospace">Kategorie: {{recipe.category}}</li>-->
+<!--    <br/>-->
+<!--    <li>-->
+<!--      <img [src]=recipe.img alt="foto" [ngClass]="this.localStorage?'':'blur'">-->
+<!--    </li>-->
+<!--    <br/>-->
+<!--    <li class="font-weight-light">{{recipe.content | dots: 100}}</li>-->
+<!--  </section>-->
+<!--</ul>-->
+<!--<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" color="#fff" type="square-jelly-box" [fullScreen]="true"><p-->
+<!--  style="color: white"> Stahuju recepty... </p>>-->
+<!--</ngx-spinner>-->
+<section id="whereItBegin">
+  <div class="container-fluid about-me-section">
+    <h3>Co je receptoland?</h3>
+    <div class="row">
+      <div class="col-lg-9 about-me-section-left">Je to místo, kde si můžete vytvářet úkoly a
+        pracovat s nima. Úkol dát jako done, nebo zpět do stavu rozpracováno apod. Také zde
+        můžete vytvářet svoje vlastní fotky s příběhy. Co se tím myslí? Vyfotíte to, co se Vám
+        líbí, otevřete aplikaci a přidáte fotku, dáte ji pod svůj titulek, přidáte popis, můžete
+        vybrat kategorii a nebo i tag. Pak můžete poslat svým známím link, kde uvidí, co jste
+        právě vytvořili a nebo kde jste byli.
+      </div>
+      <div class="col-lg-3">
+        <fa-icon [icon]="faCoffee"
+                 [styles]="{'width': '70%', 'height': '70%'}"></fa-icon>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container-fluid experience-section">
+    <h3 id="whatIlearned">Proč?</h3>
+    <div class="row">
+      <div class="col-lg-3">
+        <fa-icon [icon]="faLaptopCode"
+                 [styles]="{'width': '70%', 'height': '70%'}"></fa-icon>
+      </div>
+      <div class="col-lg-9">
+        <ul>
+          <li>Někdy je skvělé využít i jiné aplikace, než světoznámý Facebook, Google apod.
+          </li>
+          <li>
+            Nikam dál nešíříme Vaše fotografie, poznámky a další věci, vše je naprosto soukromé.
+          </li>
+          <li>
+            Snažíme se jít s trendem a udržovat kód i funkce aktuální a trendy.
+          </li>
+          <li>
+            A proč ne? :)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

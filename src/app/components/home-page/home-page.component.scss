@@ -50,3 +50,123 @@ img {
   filter: blur(8px);
   opacity: 0.7;
 }
+
+/* #################### */
+
+.about-me-section {
+  background-color: #96ceb4;
+  color: white;
+  padding: 25px 15px 15px 15px;
+  font-family: Garamond, cursive;
+  font-size: 20px;
+  text-align: center;
+}
+
+.about-me-section-left {
+  text-align: left;
+}
+
+.img-about-me {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 50%;
+}
+
+.img-about-me:hover {
+  transform: scale(0);
+  transition: ease 5s;
+}
+
+.img-me:hover {
+  transform: rotate(360deg);
+  transform-origin: center;
+  transition: 2s ease all;
+}
+
+.img-me {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: revert;
+  padding-top: 10px;
+  border-radius: 50%;
+}
+
+.experience-section {
+  background-color: #ffeead;
+  color: brown;
+  padding: 25px 15px 15px 15px;
+  font-family: Garamond, cursive;
+  font-size: 20px;
+  text-align: left;
+}
+
+.experience-section h3 {
+  text-align: center;
+}
+
+.target-section {
+  background-color: #ffcc5c;
+  color: white;
+  padding: 25px 15px 15px 15px;
+  font-family: Garamond, cursive;
+  font-size: 20px;
+  text-align: center;
+}
+
+.who-am-i {
+  text-align: center;
+  font-style: italic;
+  padding-top: 25px;
+}
+
+.who-am-i-text {
+  text-align: center;
+  font-style: italic;
+  padding-top: 25px;
+  padding-bottom: 35px;
+}
+
+.dissapear-text {
+  font-family: 'Parisienne', cursive;
+  font-size: 5em;
+  text-align: left;
+  padding: 25px 15px;
+}
+
+nav {
+  height: 60px;
+  padding-top: 10px;
+  font-family: 'Parisienne', cursive;
+  font-size: 20px;
+  background: linear-gradient(0deg, rgba(195, 55, 34, 0.8018557764902836) 0%, rgba(253, 194, 45, 1) 100%);
+}
+
+@keyframes shine {
+  from {
+    left: 0;
+  }
+  to {
+    left: 1496px;
+  }
+}
+
+.animate {
+  height: 25px;
+  width: 50px;
+  //background-image: url("src/assets/carNoBG.png");
+  background-size: 50px;
+  position: relative;
+  animation-timing-function: linear;
+  animation: shine 10s infinite;
+}
+
+.dissapear-button {
+  padding-bottom: 25px;
+  padding-top: 25px;
+  width: 30%;
+  font-family: 'Arial', serif;
+}
+
