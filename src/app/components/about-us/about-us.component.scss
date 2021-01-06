@@ -27,7 +27,7 @@
 .img-me:hover {
   transform: rotate(360deg);
   transform-origin: center;
-  transition:  2s ease all;
+  transition: 2s ease all;
 }
 
 .img-me {
@@ -76,21 +76,41 @@
 
 .dissapear-text {
   font-family: 'Parisienne', cursive;
-  font-size:5em ;
+  font-size: 5em;
   text-align: left;
-  padding:25px 15px;
+  padding: 25px 15px;
 }
 
-nav{
+nav {
   height: 60px;
   padding-top: 10px;
   font-family: 'Parisienne', cursive;
   font-size: 20px;
+  background: linear-gradient(0deg, rgba(195, 55, 34, 0.8018557764902836) 0%, rgba(253, 194, 45, 1) 100%);
+}
+
+@keyframes shine {
+  from {
+    left: 0;
+  }
+  to {
+    left: 1496px;
+  }
+}
+
+.animate {
+  height: 25px;
+  width: 50px;
+  //background-image: url("src/assets/carNoBG.png");
+  background-size: 50px;
+  position: relative;
+  animation-timing-function: linear;
+  animation: shine 10s infinite;
 }
 
 .dissapear-button {
   padding-bottom: 25px;
-  padding-top:25px;
+  padding-top: 25px;
   width: 30%;
   font-family: 'Arial', serif;
 }

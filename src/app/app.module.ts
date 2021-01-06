@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {AppComponent} from './app.component';
 import {ComponentModule} from './components/component.module';
 import {AppRoutingModule} from './app-routing.module';
@@ -14,6 +14,8 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     AppComponent
   ],
   imports: [
+    DragDropModule,
     BrowserModule,
     FontAwesomeModule,
     ReactiveFormsModule,
@@ -38,7 +41,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     useClass: TokenInterceptor,
     multi: true
   }],
-  schemas: [NO_ERRORS_SCHEMA],
+  schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
   exports: [],
   bootstrap: [AppComponent]
 })

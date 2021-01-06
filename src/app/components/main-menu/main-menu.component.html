@@ -1,21 +1,25 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+          (click)="isCollapsed = !isCollapsed">
     <span class="navbar-toggler-icon"></span>
     Menu
   </button>
   <div class="collapse navbar-collapse" [collapse]="isCollapsed">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive="active">Recepty všech</a>
+        <a class="nav-link" routerLink="home" routerLinkActive="active">Hlavní strana</a>
       </li>
       <li class="nav-item" *ngIf="logged">
         <a class="nav-link" routerLink="recipes/list" routerLinkActive="active">Moje recepty</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="about-us" routerLinkActive="active">O nás</a>
+        <a class="nav-link" routerLink="report" routerLinkActive="active">Reportík</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="report" routerLinkActive="active">Reportík</a>
+        <a class="nav-link" routerLink="check" routerLinkActive="active">Kontrola internetu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="task" routerLinkActive="active">Ukoly</a>
       </li>
     </ul>
     <div *ngIf="logged" class="user-text">Vítej uživateli

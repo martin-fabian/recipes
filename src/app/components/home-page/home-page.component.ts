@@ -4,6 +4,8 @@ import {RecipeEntity} from '../receipts/entity/recipe.entity';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {NgxWatermarkOptions} from 'ngx-watermark';
 import {CacheService} from '../services/cache.service';
+import {faCoffee} from '@fortawesome/free-solid-svg-icons/faCoffee';
+import {faLaptopCode} from '@fortawesome/free-solid-svg-icons/faLaptopCode';
 
 @Component({
   selector: 'app-home-page',
@@ -28,6 +30,9 @@ export class HomePageComponent implements OnInit {
     degree: -25,
     fontWeight: 'bold'
   };
+
+  faCoffee = faCoffee;
+  faLaptopCode = faLaptopCode;
 
 
   constructor(private recipeService: RecipeService, private spinner: NgxSpinnerService, private cacheService: CacheService) {

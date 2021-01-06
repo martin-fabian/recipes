@@ -10,6 +10,8 @@ import {RegisterComponent} from './components/register/register.component';
 import {AuthGuardService} from './components/services/auth-guard.service';
 import {RecipeEditFormComponent} from './components/receipts/recipe-edit/recipe-edit-form.component';
 import {ReportComponent} from './components/report/report.component';
+import {CheckComponent} from './components/check/check.component';
+import {TaskComponent} from "./components/task/task.component";
 
 const appRoutes: Routes = [
   {
@@ -20,10 +22,13 @@ const appRoutes: Routes = [
   {path: 'recipes/list/add-recipe/new', component: AddReceiptFormComponent},
   {path: 'recipes/list/:id', component: RecipeDetailComponent},
   {path: 'recipes/list', canActivate: [AuthGuardService], component: RecipePageComponent},
+  {path: 'home', component: HomePageComponent},
   {path: 'report', component: ReportComponent},
+  {path: 'task', component: TaskComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'about-us', component: AboutUsComponent}
+  {path: 'about-us', component: AboutUsComponent},
+  {path: 'check', component: CheckComponent}
 ];
 
 @NgModule({

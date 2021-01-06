@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="card bg" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Kontrola pomocí libovolne url</h5>
+      <p class="card-text">Pokud chcete zadat vlastní url, přepište www.google.com v poli pod tímto
+        textem.</p>
+      <label for="url">Url:</label><input type="text" id="url" [(ngModel)]="url">&nbsp;
+      <div class="row">
+        <div class="col-lg-5 stav">STAV:</div>
+        <div class="col-lg-7" [ngClass]="statusOk === 'OK' ?
+      'blinking-green' : 'blinking-red'">{{statusOk}}</div>
+      </div>
+      <button class="btn btn-success" (click)="onCheckInternetUrl(url)">Internet
+        check url START
+      </button>
+      <button class="btn btn-danger" (click)="offCheckInternetUrl()">Internet check url STOP
+      </button>
+    </div>
+  </div>
+</div>

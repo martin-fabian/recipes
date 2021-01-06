@@ -24,6 +24,9 @@ import {ReportComponent} from './report/report.component';
 import {SliderComponent} from './slider/slider.component';
 import {CarouselModule} from 'ngx-bootstrap/carousel';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {CheckComponent} from './check/check.component';
+import {TaskComponent} from './task/task.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 const components = [
@@ -40,11 +43,15 @@ const components = [
   RegisterComponent,
   AlertComponent,
   ReportComponent,
-  SliderComponent
+  SliderComponent,
+  TaskComponent,
+  AboutUsComponent,
+  CheckComponent
 ];
 
 @NgModule({
   imports: [
+    DragDropModule,
     RouterModule,
     BrowserModule,
     ReactiveFormsModule,
@@ -60,7 +67,6 @@ const components = [
   ],
   declarations: [
     ...components,
-    AboutUsComponent,
     DotsPipe
   ],
   providers: [],

@@ -17,6 +17,11 @@ export class AboutUsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.getElementsByClassName('alert-danger')[0].innerHTML = '';
+    // @ts-ignore
+    document.getElementsByClassName('alert-danger')[0].classList = '';
+    // @ts-ignore
+    document.getElementsByClassName('footer')[0].classList = '';
   }
 
   disappear(): void {
